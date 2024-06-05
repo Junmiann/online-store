@@ -14,32 +14,23 @@ DB_PASS = os.getenv('PG_PASSWORD')
 
 con = psycopg2.connect(host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASS)
 
-''' user and orderId is none when no ones logged in ''' 
 user = None
 orderid = None
 
-''' all products '''
-def all_products():
+def sp_all_products():
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM show_products ORDER BY product_id")
+    cur.callproc("PUBLIC.sp_all_products")
 
     list_products = cur.fetchall()
 
-    list_products_with_id = []
-    for product in list_products:
-        product_with_id = list(product)
-        product_with_id.append(product[0])
-        list_products_with_id.append(tuple(product_with_id))
-
     cur.close()
 
-    return list_products_with_id
+    return list_products
 
-''' startpage '''
 @app.route("/")
 def index():
-    list_products = all_products()
+    list_products = sp_all_products()
 
     return render_template("index.html", list_products=list_products)
 

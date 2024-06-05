@@ -32,18 +32,18 @@
       <div class="container">
         <h1>Products</h1>
         <div class="products-container">
-          {% for r in list_products %}
-          <div class="product">
-            <div class="product-img">
-              <img src="{{ r[7] }}" alt="{{ r[1] }}" class="product_image">
+          {% for product in list_products %}
+            <div class="product">
+                <div class="product-img">
+                    <img src="{{ product[4] }}" alt="{{ product[1] }}" class="product_image">
+                </div>
+                <div class="product-info">
+                    <p class="product-supplier">{{ product[2] }}</p>
+                    <p class="product-name">{{ product[1] }}</p>
+                    <p>{{ product[3] }} SEK</p>
+                    <input type="submit" class="add-to-cart-button btn btn-dark" value="+">
+                </div>
             </div>
-            <div class="product-info">
-              <p class="product-supplier">{{ r[4] }}</p>
-              <p class="product-name">{{ r[1] }}</p>
-              <p>{{ r[6] }} SEK</p>
-              <input type="submit" class="add-to-cart-button btn btn-dark" value="+">
-            </div>
-          </div>
           {% endfor %}
         </div>
       </div>

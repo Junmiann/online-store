@@ -2,8 +2,6 @@ import psycopg2
 from psycopg2 import Error
 from flask import Flask, render_template, flash, redirect, url_for, request
 import os
-from dotenv import load_dotenv
-from datetime import date
 
 app = Flask(__name__)
 
@@ -24,6 +22,7 @@ def sp_all_products():
 
     list_products = cur.fetchall()
 
+    con.commit()
     cur.close()
 
     return list_products
@@ -33,6 +32,18 @@ def index():
     list_products = sp_all_products()
 
     return render_template("index.html", list_products=list_products)
+
+@app.route("/product/<int:product_id>")
+def product(product_id):
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM show_products WHERE product_id=%s", (product_id,))
+
+    selected_product = cur.fetchone()
+
+    con.commit()
+
+    return render_template("product.html", product_id=product_id, selected_product=selected_product)
 
 if __name__ == "__main__":
     secret_key = os.getenv('SECRET_KEY')

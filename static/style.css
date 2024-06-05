@@ -2,10 +2,6 @@
     font-family: "Rambla", sans-serif;
 }
 
-.container {
-    text-align: center;
-}
-
 .navbar {
     box-shadow: 0 1px 20px 1px #c2c0be;
 }
@@ -59,8 +55,6 @@
 .product-img > img {
     margin: 10px 0 10px 0;
     vertical-align: middle;
-    width: auto;
-    height: auto;
     max-width: 75%;
     max-height: 75%;
 }
@@ -71,19 +65,6 @@
     height: 50%;
     justify-content: space-between;
     color: #111;
-}
-
-.product-info > p {
-    margin: 0;
-}
-
-.product-info > .product-supplier {
-    font-style: italic;
-    font-size: 12px;
-}
-
-.product-info > .product-name {
-    font-weight: bold;
 }
 
 .product-info > .add-to-cart-button {
@@ -97,4 +78,53 @@
 .product-info > .add-to-cart-button:hover {
     background-color: #a75570;
     transition: 0.3s;
+}
+
+.selected-product,
+.add-to-cart-field {
+    display: flex;
+}
+
+.selected-product-img {
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+.selected-product-img > img {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.add-to-cart-field > input {
+    background-color: #c07c93;
+    color: #f3f9fa;
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+}
+
+.quantity {
+    display:flex;
+    width: 150px;
+    border: 1.5px solid #eee;
+    border-radius: 5px;
+}
+.quantity > input,
+.quantity > button {
+    width: 50px;
+    padding: 0.5em;
+    text-align:center;
+    border: none;
+    outline: none;
+}
+.quantity > button {
+    background-color: #eee;
+    z-index: 1;
 }

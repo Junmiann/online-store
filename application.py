@@ -5,10 +5,10 @@ import os
 
 app = Flask(__name__)
 
-DB_HOST = os.getenv('PG_HOST')
-DB_NAME = os.getenv('PG_DATABASE')
-DB_USER = os.getenv('PG_USER')
-DB_PASS = os.getenv('PG_PASSWORD')
+DB_HOST = os.getenv("PG_HOST")
+DB_NAME = os.getenv("PG_DATABASE")
+DB_USER = os.getenv("PG_USER")
+DB_PASS = os.getenv("PG_PASSWORD")
 
 con = psycopg2.connect(host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASS)
 
@@ -22,7 +22,6 @@ def sp_all_products():
 
     list_products = cur.fetchall()
 
-    con.commit()
     cur.close()
 
     return list_products
@@ -37,15 +36,13 @@ def index():
 def product(product_id):
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM show_products WHERE product_id=%s", (product_id,))
+    cur.callproc("get_product_by_id", [product_id])
 
-    selected_product = cur.fetchone()
-
-    con.commit()
+    selected_product = cur.fetchall()
 
     return render_template("product.html", product_id=product_id, selected_product=selected_product)
 
 if __name__ == "__main__":
-    secret_key = os.getenv('SECRET_KEY')
+    secret_key = os.getenv("SECRET_KEY")
     app.secret_key=secret_key
     app.run(debug=True)

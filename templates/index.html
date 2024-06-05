@@ -15,20 +15,20 @@
 <body>
     {% include 'navbar.html' %}
     <main>
-      <div class="container">
+      <div class="container text-center">
         <h1>Products</h1>
         <div class="products-container">
           {% for product in list_products %}
             <div class="product">
               <a href="{{ url_for('product', product_id=product[0]) }}">
                 <div class="product-img">
-                    <img src="{{ product[4] }}" alt="{{ product[1] }}" class="product_image">
+                    <img src="{{ product[4] }}" alt="{{ product[1] }}" class="w-auto h-auto">
                 </div>
               </a> 
               <div class="product-info">
-                  <p class="product-supplier">{{ product[2] }}</p>
-                  <p class="product-name">{{ product[1] }}</p>
-                  <p>{{ product[3] }} SEK</p>
+                  <p class="font-italic small m-0">{{ product[2] }}</p> <!-- supplier -->
+                  <p class="font-weight-bold m-0">{{ product[1] }}</p> <!-- product name -->
+                  <p class="m-0">{{ product[3] }} SEK</p>
                   <input type="submit" class="add-to-cart-button btn btn-dark" value="+">
               </div>
             </div>

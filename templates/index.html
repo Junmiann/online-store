@@ -16,6 +16,12 @@
     {% include 'navbar.html' %}
     <main>
       <div class="container text-center">
+        {% if user is not none %}
+          <div class="welcome-msg">
+            <p>Hello {{user[1]}}!</p>
+          </div>
+        {% endif %}
+        
         <h1>Products</h1>
         <div class="products-container">
           {% for product in list_products %}

@@ -55,7 +55,8 @@ def login_form():
 
 @app.route("/user_profile")
 def user_profile():
-    return render_template("user_profile.html")
+    user = session.get('user')
+    return render_template("user_profile.html", user=user)
 
 @app.route("/logout")
 def logout():

@@ -7,7 +7,7 @@
     <a class="nav-link" href="/logout">Logout</a>
   </div>
 
-  {% if user is not none %}
+  {% if user %}
     <div class="welcome-msg">
       <p>Hello {{user[1]}}!</p>
     </div>

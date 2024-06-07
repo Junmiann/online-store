@@ -15,9 +15,9 @@
                 <h3>{{ r[3] }} SEK</h3>
                 <div class="add-to-cart-field mt-5">
                     <div class="quantity">
-                        <button class="btn p-3">-</button>
-                        <input class="quantity" min="1" name="quantity" value="1" type="number">
-                        <button class="btn">+</button>
+                        <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>
+                        <input id="quantity" min="1" name="quantity" value="1" type="number" readonly>
+                        <button class="btn add-btn" type="button" onclick="increment()">+</button>
                     </div>
                     <input type="submit" class="add-to-cart-button btn ml-3 text-uppercase" value="Add to cart">
                 </div>
@@ -26,3 +26,18 @@
         {% endfor %}
     </div>
 {% endblock %}
+
+<script>
+    let quantity = document.querySelector("#quantity");
+
+    const decrement = () => {
+        if(quantity.value <= 1) {
+            quantity.value = 1;
+        } else {
+            quantity.value = parseInt(quantity.value) - 1;
+        }
+    }
+    const increment = () => {
+        quantity.value = parseInt(quantity.value) + 1;
+    }
+</script>

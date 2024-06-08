@@ -1,0 +1,20 @@
+<title>{% block title %}OnlineStore │ Cart{% endblock %}</title>
+
+{% include 'shared/layout.html' %}
+
+{% block content %}
+    <div class="container">
+        {% if user %}
+            {% if order_id %}
+                {% for order_detail in user_order %}
+                <p>Total sum: {{ order_detail[2] }}</p>
+                {% endfor %}
+            {% else %}
+                <p>The cart is empty!</p>
+            {% endif %}
+
+        {% else %}
+            <p>Log in to check your shopping cart!</p>
+        {% endif %}
+    </div>
+{% endblock %}

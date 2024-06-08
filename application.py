@@ -107,6 +107,24 @@ def add_to_cart(product_id):
 
     return redirect(url_for("index"))
 
+@app.route("/cart")
+def cart():
+    user = session.get('user')
+
+    if user:
+        order_id = check_order_status()
+
+        if order_id:
+            cur = con.cursor()
+            cur.execute("SELECT * FROM orders WHERE order_id=%s", order_id)
+            user_order = cur.fetchall()
+            return render_template("/cart.html", user=user, order_id=order_id, user_order=user_order)
+        else:
+            render_template("/cart.html", user=user)
+            
+    else:
+        return render_template("/cart.html")
+
 if __name__ == "__main__":
     secret_key = os.getenv("SECRET_KEY")
     app.secret_key = secret_key

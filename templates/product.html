@@ -13,14 +13,16 @@
                 <h5>{{ r[2] }}</h5> <!-- supplier -->
                 <h2 class="font-weight-bold display-4 text-uppercase">{{ r[1] }}</h2> <!-- product name -->
                 <h3>{{ r[3] }} SEK</h3>
-                <div class="add-to-cart-field mt-5">
-                    <div class="quantity">
-                        <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>
-                        <input id="quantity" min="1" name="quantity" value="1" type="number" readonly>
-                        <button class="btn add-btn" type="button" onclick="increment()">+</button>
+                <form method="post" action="{{ url_for('add_to_cart', product_id=r[0]) }}">
+                    <div class="add-to-cart-field mt-5">
+                        <div class="quantity">
+                            <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>
+                            <input id="quantity" min="1" name="quantity" value="1" type="number" readonly>
+                            <button class="btn add-btn" type="button" onclick="increment()">+</button>
+                        </div>
+                        <input type="submit" class="add-to-cart-button btn ml-3 text-uppercase" id="add-to-cart-button" value="Add to cart">
                     </div>
-                    <input type="submit" class="add-to-cart-button btn ml-3 text-uppercase" value="Add to cart">
-                </div>
+                </form>
             </div>
         </div>
         {% endfor %}

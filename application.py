@@ -1,16 +1,9 @@
-import psycopg2
-from psycopg2 import Error
 from flask import Flask, render_template, flash, redirect, url_for, request, session
-import os
+from db import *
 
 app = Flask(__name__)
 
-DB_HOST = os.getenv("PG_HOST")
-DB_NAME = os.getenv("PG_DATABASE")
-DB_USER = os.getenv("PG_USER")
-DB_PASS = os.getenv("PG_PASSWORD")
-
-con = psycopg2.connect(host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASS)
+order_id = None
 
 def sp_all_products():
     cur = con.cursor()
@@ -18,6 +11,23 @@ def sp_all_products():
     list_products = cur.fetchall()
     cur.close()
     return list_products
+
+def check_order_status():
+    global order_id
+    user = session.get('user')
+
+    cur = con.cursor()
+    cur.callproc("check_order_status", [user[0], 'P'])
+    order_status = cur.fetchone()
+
+    if order_status:
+        order_id = order_status
+    else:
+        cur.callproc("create_order", [0, user[0]])
+        con.commit()
+        order_id = cur.fetchone()[0]
+    
+    return order_id
 
 @app.route("/")
 def index():
@@ -30,8 +40,7 @@ def product(product_id):
     cur = con.cursor()
     cur.callproc("get_product_by_id", [product_id])
     selected_product = cur.fetchall()
-    user = session.get('user')
-    return render_template("product.html", product_id=product_id, selected_product=selected_product, user=user)
+    return render_template("product.html", product_id=product_id, selected_product=selected_product)
 
 @app.route("/login")
 def login():
@@ -56,11 +65,46 @@ def login_form():
 @app.route("/user_profile")
 def user_profile():
     user = session.get('user')
+    if user is None:
+        return redirect(url_for("login"))
     return render_template("user_profile.html", user=user)
 
 @app.route("/logout")
 def logout():
     session.pop('user', None)
+    return redirect(url_for("index"))
+
+@app.route("/add_to_cart/<int:product_id>", methods=["POST"])
+def add_to_cart(product_id):
+    user = session.get('user')
+    if not user:
+        flash("You need to be logged in to add items to the cart")
+        return redirect(url_for("login"))
+    
+    order_id = check_order_status()
+
+    cur = con.cursor()
+
+    product_quantity = int(request.form["quantity"])
+    cur.callproc("get_product_by_id", [product_id])
+    available_quantity = cur.fetchone()[5]
+
+    if product_quantity > available_quantity:
+        flash("Can't add product(s): Requested quantity exceeds available quantity")
+        return redirect(url_for("product", product_id=product_id))
+
+    cur.callproc("check_product_in_cart", [order_id, product_id])
+    existing_product = cur.fetchall()
+    if existing_product:
+        cur.callproc("update_product_quantity", [product_quantity, order_id, product_id])
+    else:
+        cur.callproc("add_product", [order_id, user[0], product_id, product_quantity])
+
+    cur.callproc("update_order_total_price", [order_id])
+    con.commit()
+
+    cur.close()
+
     return redirect(url_for("index"))
 
 if __name__ == "__main__":

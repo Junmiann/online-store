@@ -128,3 +128,29 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #eee;
     z-index: 1;
 }
+
+.cart-products {
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-products,
+.cart-product-details {
+    display: flex;
+}
+
+.cart-product-img {
+    width: 30%;
+}
+.cart-product-img > img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.cart-product-details {
+    padding: 20px 0;
+    width: 70%;
+    justify-content: space-between;
+}
+.cart-product-details > p {
+    width: 20%;
+}

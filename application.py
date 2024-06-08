@@ -115,10 +115,16 @@ def cart():
         order_id = check_order_status()
 
         if order_id:
+            list_products = sp_all_products()
+
             cur = con.cursor()
-            cur.execute("SELECT * FROM orders WHERE order_id=%s", order_id)
+            cur.callproc("get_order_details", [order_id])
             user_order = cur.fetchall()
-            return render_template("/cart.html", user=user, order_id=order_id, user_order=user_order)
+
+            cur.callproc("get_order_products", [order_id])
+            user_order_products = cur.fetchall()
+
+            return render_template("/cart.html", user=user, order_id=order_id, list_products=list_products, user_order=user_order, user_order_products=user_order_products)
         else:
             render_template("/cart.html", user=user)
             

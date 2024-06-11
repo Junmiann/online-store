@@ -1,0 +1,42 @@
+<title>{% block title %}OnlineStore │ Cart{% endblock %}</title>
+
+{% include 'shared/layout.html' %}
+
+{% block content %}
+    <div class="container">
+        {% if order_id %}
+            <h1 class="text-uppercase font-weight-bold text-center mb-3">Order details</h1>
+            {% for order_info in user_orders %}
+            <div class="order" id="order-quick-info">
+                <table>
+                    <tr class="text-uppercase">
+                        <th>Date</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td>{{ order_info[1] }}</td>
+                        <td>{{ order_info[3] }} SEK</td>
+                    </tr>
+                </table>
+            </div>
+            {% endfor %}
+
+            {% for product in user_order_products %}
+                <div class="cart-products p-4">
+                    <div class="cart-product-img">
+                        <a href="{{ url_for('product', product_id=product[4]) }}">
+                            <img src="{{ product[0] }}" alt="{{ product[1] }}">
+                        </a>
+                    </div>
+                    <div class="cart-product-details">
+                        <p class="font-weight-bold"><a href="{{ url_for('product', product_id=product[4]) }}">{{ product[1] }}</a></p>
+                        <p><span class="cart-product-quantity font-italic">Quantity:</span> {{ product[2] }}</p>
+                        <p class="font-weight-bold">{{ product[3] }} SEK</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+<script src="/static/js/script.js"></script>

@@ -1,15 +1,45 @@
-<title>{% block title %}OnlineStore │ Profile{% endblock %}</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}OnlineStore │ Profile{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% include 'shared/layout.html' %}
 
-{% include 'shared/layout.html' %}
-
-{% block content %}
-  <div class="container">
-    <a class="nav-link" href="/logout">Logout</a>
-  </div>
-
-  {% if user %}
-    <div class="welcome-msg">
-      <p>Hello {{user[1]}}!</p>
-    </div>
-  {% endif %}
-{% endblock %}
+    {% block content %}
+      <div class="container">
+        <a class="nav-link logout-button text-center ml-auto" href="{{ url_for('logout') }}">Logout</a>
+        {% if user %}
+          <div class="welcome-msg mb-3">
+              <h4 class="text-center">Hello <em>{{ user[1] }}</em>!</h4>
+          </div>
+          <div class="user-orders">
+              <h3 class="text-uppercase font-weight-bold">Orders</h3>
+              {% for order_info in user_orders %}
+              <div class="order">
+                <table>
+                  <tr class="text-uppercase order-table-th">
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                  <tr>
+                    <td><a href="{{ url_for('user_order_details', order_id=order_info[0]) }}">{{ order_info[0] }}</a></td>
+                    <td>{{ order_info[1] }}</td>
+                    <td>{{ order_info[2] }}</td>
+                    <td>{{ order_info[3] }} SEK</td>
+                    <td>{{ order_info[4] }}</td>
+                  </tr>
+                </table>
+              </div>
+              {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endblock %}
+</body>
+</html>

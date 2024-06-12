@@ -8,5 +8,9 @@ const decrement = () => {
     }
 }
 const increment = () => {
-    quantity.value = parseInt(quantity.value) + 1;
+    if(quantity.value >= 10) {
+        quantity.value = 10;
+    } else {
+        quantity.value = parseInt(quantity.value) + 1;
+    }
 }

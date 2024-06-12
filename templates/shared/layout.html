@@ -23,8 +23,8 @@
                     <a class="nav-link nav-brand" href="{{url_for('index')}}">OnlineStore</a>
                 </li>
                 <li class="nav-item">
-                <form class="form-inline">
-                    <input class="form-control" id="search-field" type="search" placeholder="Search" aria-label="Search">
+                <form method="GET" action="{{ url_for('search') }}" class="form-inline">
+                    <input class="form-control" id="search-field" name="query" type="search" placeholder="Search" aria-label="Search">
                 </form>
                 </li>
                 <li class="nav-item nav-item-icons">
@@ -50,6 +50,14 @@
             </ul>
             </div>
         </nav>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <p class="text-center">{{ msg }}</p> <!-- Corrected line -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
         {% block content %}{% endblock %}
     </body>

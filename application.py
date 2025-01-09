@@ -174,11 +174,9 @@ def remove_item_from_cart(product_id):
 
     cur.callproc("get_product_by_id", [product_id])
     
-    existing_product = cur.fetchall()
+    cur.fetchall()
 
-    if existing_product:
-        cur.callproc("delete_product", [order_id, product_id])
-        cur.callproc("update_order_total_price", [order_id])
+    cur.callproc("delete_product", [order_id, product_id])
 
     con.commit()
     cur.close()

@@ -132,7 +132,7 @@ input[type=number]::-webkit-outer-spin-button {
 .cart-products {
     border-bottom: 1px solid #ddd;
     background-color: #f5f3f3;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .cart-products,
@@ -168,10 +168,26 @@ input[type=number]::-webkit-outer-spin-button {
     color: #948787;
 }
 
-.total-price {
+.total-price,
+.check-out-btn {
     background-color: #f5f3f3;
     border-radius: 5px;
-    box-shadow: 0 4px 2px -2px #cfcaca; 
+    box-shadow: 0 4px 2px -2px #cfcaca;
+}
+.total-price > p {
+    font-size: 1.2em;
+    padding-top: 10px;
+}
+.check-out-btn {
+    width: 100%;
+    border: none;
+    background-color: #c07c93;
+    font-size: 1.5em;
+    color: #fff;
+}
+.check-out-btn:hover {
+    background-color: #d88fa7;
+    transition: 0.3s;
 }
 
 .welcome-msg {

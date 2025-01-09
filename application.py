@@ -101,7 +101,7 @@ def user_order_details(order_id):
     user = session.get("user")
     
     cur = con.cursor()
-    cur.callproc("customer_orders", [user[0], order_id])
+    cur.callproc("get_order_details", [order_id])
     user_orders = cur.fetchall()
     
     cur.callproc("get_order_products", [order_id])
@@ -182,6 +182,21 @@ def remove_item_from_cart(product_id):
     cur.close()
 
     return redirect(url_for("cart"))
+
+@app.route("/cart/order_check_out/<int:order_id>", methods=["POST"])
+def order_check_out(order_id):
+    user = session.get("user")
+
+    order_id = check_order_status()
+
+    cur = con.cursor()
+
+    cur.callproc("order_check_out", [user[0], order_id])
+
+    con.commit()
+    cur.close()
+
+    return redirect(url_for("index"))
 
 @app.route("/logout")
 def logout():

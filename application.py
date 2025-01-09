@@ -166,6 +166,25 @@ def cart():
         flash("Log in to check your shopping cart!")
         return render_template("/cart.html")
 
+@app.route("/remove_item_from_cart/<int:product_id>", methods=["POST"])
+def remove_item_from_cart(product_id):
+    order_id = check_order_status()
+
+    cur = con.cursor()
+
+    cur.callproc("get_product_by_id", [product_id])
+    
+    existing_product = cur.fetchall()
+
+    if existing_product:
+        cur.callproc("delete_product", [order_id, product_id])
+        cur.callproc("update_order_total_price", [order_id])
+
+    con.commit()
+    cur.close()
+
+    return redirect(url_for("cart"))
+
 @app.route("/logout")
 def logout():
     session.pop("user", None)

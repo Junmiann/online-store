@@ -238,3 +238,42 @@ input[type=number]::-webkit-outer-spin-button {
 #order-quick-info > table td {
     padding: 5px;
 }
+
+.login-page-container {
+    margin-top: 7em;
+}
+
+.login-form {
+    background-color: #f7f5f5;
+    padding: 2em;
+    width: 40em;
+    border-radius: 5px;
+}
+.login-form > p {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+}
+.login-form > p > label {
+    margin: 1.5em 0 -0.1em 0;
+}
+.login-form > p > input {
+    padding: 0.7em;
+    border: 1px solid #6d6d6d;
+    border-radius: 10px;
+}
+.login-form > p > input::placeholder {
+    font-style: italic;
+    font-size: 0.8em;
+}
+.login-form > p > input:hover {
+    border: 1px solid #000;
+    transition: 0.3s;
+}
+.login-form > .button {
+    width: 80%;
+    margin: 1.5em 0 0.7em 0;
+    padding: 1em;
+    border-radius: 10px;
+}

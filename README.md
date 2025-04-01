@@ -1,1 +1,3 @@
 # online-store
+
+Unfinished project

@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="container">
-    <a class="nav-link logout-button text-center ml-auto" href="{{ url_for('logout') }}">Logout</a>
+    <a class="nav-link logout-button text-center ml-auto" href="{{ url_for('user_profile.logout') }}">Logout</a>
     {% if user %}
       <div class="welcome-msg mb-3">
           <h4 class="text-center">Hello <em>{{ user[1] }}</em>!</h4>
@@ -22,7 +22,7 @@
               </tr>
               {% for order_info in user_orders %}
               <tr>
-                <td><a href="{{ url_for('user_order_details', order_id=order_info[0]) }}">{{ order_info[0] }}</a></td>
+                <td><a href="{{ url_for('user_profile.user_order_details', order_id=order_info[0]) }}">{{ order_info[0] }}</a></td>
                 <td>{{ order_info[1] }}</td>
                 <td>{{ order_info[2] }}</td>
                 <td>{{ order_info[3] }} SEK</td>

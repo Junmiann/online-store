@@ -10,15 +10,15 @@
                 {% for product in user_order_products %}
                     <div class="cart-products p-4">
                         <div class="cart-product-img">
-                            <a href="{{ url_for('product', product_id=product[4]) }}">
+                            <a href="{{ url_for('product.product', product_id=product[4]) }}">
                                 <img src="{{ product[0] }}" alt="{{ product[1] }}">
                             </a>
                         </div>
                         <div class="cart-product-details">
-                            <p class="font-weight-bold"><a href="{{ url_for('product', product_id=product[4]) }}">{{ product[1] }}</a></p>
+                            <p class="font-weight-bold"><a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a></p>
                             <p><span class="cart-product-quantity font-italic">Quantity:</span> {{ product[2] }}</p>
                             <p class="font-weight-bold">{{ product[3] }} SEK</p>
-                            <form method="POST" action="{{ url_for('remove_item_from_cart', product_id=product[4]) }}">
+                            <form method="POST" action="{{ url_for('cart.remove_item_from_cart', product_id=product[4]) }}">
                                 <button type="submit" class="delete-product-from-cart btn ml-3 text-uppercase" id="delete-product-from-cart">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -36,7 +36,7 @@
                     </div>
                 
                     <div class="mt-4 text-center">
-                        <form method="POST" action="{{ url_for('order_check_out', order_id=order_detail[0]) }}">
+                        <form method="POST" action="{{ url_for('cart.order_check_out', order_id=order_detail[0]) }}">
                             <button type="submit" class="check-out-btn p-4 font-weight-bold">Check out</button>
                         </form>
                     </div>

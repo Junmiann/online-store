@@ -3,20 +3,21 @@
 {% include 'shared/layout.html' %}
 
 {% block content %}
-  <div class="container">
-    <form action="/login_form" method="POST">
+  <div class="container login-page-container">
+    <h1 class="text-center font-weight-bold text-uppercase">Login</h1>
+    <form action="/login_form" method="POST" class="login-form m-auto text-center">
         <p>
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="Write here" required>
+          <input type="email" name="email" id="email" placeholder="e.g., hello@gmail.com" required>
         </p>
         <p>
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" placeholder="Write here" required>
+          <input type="password" name="password" id="password" required>
         </p>
         
-        <input type="submit" class="button btn btn-dark" value="Submit">
+        <input type="submit" class="button btn btn-dark" value="Login">
 
-        <a href="/registration" id="register"><p>Register</p></a>
+        <a href="#" id="register"><p>Register</p></a>
     </form>
   </div>
 {% endblock %}

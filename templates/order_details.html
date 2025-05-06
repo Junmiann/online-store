@@ -24,12 +24,12 @@
             {% for product in user_order_products %}
                 <div class="cart-products p-4">
                     <div class="cart-product-img">
-                        <a href="{{ url_for('product', product_id=product[4]) }}">
+                        <a href="{{ url_for('product.product', product_id=product[4]) }}">
                             <img src="{{ product[0] }}" alt="{{ product[1] }}">
                         </a>
                     </div>
                     <div class="cart-product-details">
-                        <p class="font-weight-bold"><a href="{{ url_for('product', product_id=product[4]) }}">{{ product[1] }}</a></p>
+                        <p class="font-weight-bold"><a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a></p>
                         <p><span class="cart-product-quantity font-italic">Quantity:</span> {{ product[2] }}</p>
                         <p class="font-weight-bold">{{ product[3] }} SEK</p>
                     </div>

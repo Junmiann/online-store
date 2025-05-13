@@ -233,41 +233,56 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 5px;
 }
 
-/* login-page */
-.login-page-container {
-    margin-top: 7em;
+/* forms (login and registration) */
+.forms-container {
+    margin: 7em 0;
 }
 
-.login-form {
+.form-groups {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    margin-bottom: -1em;
+}
+
+.form-groups > p {
+    display: flex;
+    flex-direction: column;
+    width: 39%;
+}
+
+.form {
     background-color: #f7f5f5;
     padding: 2em;
     width: 40em;
     border-radius: 5px;
 }
-.login-form > p {
+.form > p {
     display: flex;
     flex-direction: column;
     width: 80%;
     margin: auto;
 }
-.login-form > p > label {
+.form > p > label,
+.form-groups > p > label {
     margin: 1.5em 0 0 0;
     text-align: left;
 }
-.login-form > p > input {
+.form > p > input,
+.form-groups > p > input {
     padding: 0.7em;
     border: 1px solid #6d6d6d;
     border-radius: 10px;
 }
-.login-form > p > input::placeholder {
+.form > p > input::placeholder {
     font-style: italic;
     font-size: 0.8em;
 }
-.login-form > p > input:hover {
+.form > p > input:hover {
     border: 1px solid #000;
     transition: 0.3s;
 }
-.login-form > .button {
+.form > .button {
     width: 80%;
     margin: 1.5em 0 0.7em 0;
     padding: 1em;

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, flash, redirect, url_for, request, session, Blueprint
 from db import *
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 
@@ -11,15 +12,15 @@ def login():
 
 @login_bp.route("/login_form", methods=["POST"])
 def login_form():
-    email = request.form["email"]
-    password = request.form["password"]
+    user_email = request.form["email"]
+    user_password = request.form["password"]
 
     cur = con.cursor()
-    cur.callproc("check_account", [email, password])
-    account = cur.fetchall()
+    cur.callproc("get_user_by_email", [user_email])
+    user = cur.fetchone()
 
-    if account:
-        session["user"] = account[0]
+    if user and check_password_hash(user[4] , user_password):
+        session["user"] = user
         return redirect(url_for("index"))
     else:
         flash("Invalid credentials, please try again!")

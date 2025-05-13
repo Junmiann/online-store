@@ -4,13 +4,13 @@
 
 {% block content %}
   <div class="container text-center">
-    <h1>Products</h1>
+    <h1 class="font-weight-bold text-uppercase">Products</h1>
     <div class="products-container">
       {% for product in list_products %}
         <div class="product">
           <a href="{{ url_for('product.product', product_id=product[0]) }}">
             <div class="product-img">
-                <img src="{{ product[4] }}" alt="{{ product[1] }}" class="w-auto h-auto">
+                <img src="{{ product[4] }}" alt="{{ product[1] }}" class="w-auto h-auto" draggable="false">
             </div>
           </a> 
           <div class="product-info">

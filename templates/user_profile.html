@@ -7,7 +7,7 @@
     <a class="nav-link logout-button text-center ml-auto" href="{{ url_for('user_profile.logout') }}">Logout</a>
     {% if user %}
       <div class="welcome-msg mb-3">
-          <h4 class="text-center">Hello <em>{{ user[1] }}</em>!</h4>
+          <h4 class="text-center">Hi <strong>{{ user[1] }}</strong>!</h4>
       </div>
       <div class="user-orders">
           <h3 class="text-uppercase font-weight-bold">Orders</h3>

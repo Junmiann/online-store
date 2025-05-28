@@ -3,7 +3,7 @@
 {% include 'shared/layout.html' %}
 
 {% block content %}
-  <div class="container text-center">
+  <div class="container text-center m-auto">
     <h1 class="font-weight-bold text-uppercase">Products</h1>
     <div class="products-container">
       {% for product in list_products %}
@@ -14,9 +14,8 @@
             </div>
           </a> 
           <div class="product-info">
-              <p class="font-italic small m-0">{{ product[2] }}</p> <!-- supplier -->
-              <p class="font-weight-bold m-0">{{ product[1] }}</p> <!-- product name -->
-              <p class="m-0">{{ product[3] }} SEK</p>
+              <p class="m-0 mt-2">{{ product[1] }}</p> <!-- product name -->
+              <p class="font-weight-bold product-price mb-2">{{ product[3] }} SEK</p>
           </div>
         </div>
       {% endfor %}

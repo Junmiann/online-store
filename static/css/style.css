@@ -1,23 +1,33 @@
 * {
     font-family: "Rambla", sans-serif;
+    margin: 0;
 }
 
 /* navbar */
 .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     box-shadow: 0 4px 20px -2px #c2c0be;
+    gap: 1rem;
+    width: 100%;
 }
 
-.nav-brand {
+.brand-icon {
     font-family: "Chango", sans-serif;
     font-size: 20px;
 }
 
-.nav-item > a {
+.nav-item > a, 
+.brand-icon {
     color: #c07c93;
 }
-.nav-item > a:hover {
+.nav-item > a:hover, 
+.brand-icon:hover {
     color: #a75570;
     transition: 0.3s;
+    text-decoration: none;
 }
 
 .nav-item-icons {
@@ -29,7 +39,17 @@
     margin-left: 15px;
 }
 
-/* search field */
+.navbar-collapse {
+    flex-grow: 0 !important;
+}
+
+/* Search container */
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
 #search-field {
     width: 45em;
     height: 3em;
@@ -41,33 +61,37 @@
 .products-container {
     display: flex;
     flex-wrap: wrap;
+    flex: auto;
 }
 
 .product {
-    max-width: 11em;
-    max-height: 11em;
-    margin: 0.2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15em;
+    height: 15em;
+    margin: 0.5em;
     background-color: #eee;
-    border-radius: 5px;
-}
-
-.product-img {
-    height: 40%;
+    border-radius: 3px;
+    box-sizing: border-box;
 }
 
 .product-img > img {
-    margin: 10px 0 10px 0;
     vertical-align: middle;
-    max-width: 75%;
-    max-height: 75%;
+    max-width: 15em;
+    max-height: 10em;
+    object-fit: cover;
 }
 
 .product-info {
     display: flex;
     flex-direction: column;
-    height: 50%;
     justify-content: space-between;
     color: #111;
+}
+
+.product-info > .product-price {
+    font-size: 25px;
 }
 
 /* product page */
@@ -287,4 +311,46 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 1.5em 0 0.7em 0;
     padding: 1em;
     border-radius: 10px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 800px) {
+    /* navbar */
+    .custom-toggler .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(216, 143, 167)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+
+    .custom-toggler.navbar-toggler {
+        border: none;
+        margin-left: -0.5em;
+    } 
+
+    .navbar {
+        justify-content: flex-start !important;
+    }
+
+    .brand-icon {
+        font-size: 15px;
+    }
+
+    #search-field {
+        width: 16em;
+    }
+
+    /* products on homepage */
+    .products-container {
+        justify-content: center;
+    }
+
+    .product {
+        width: 20em;
+        height: 15em;
+        margin: 1em;
+    }
+
+    .product-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #111;
+    }
 }

@@ -6,16 +6,15 @@
     <div class="container text-center">
         {% for r in selected_product %}
         <div class="selected-product mt-5">
-            <div class="selected-product-img w-50 p-3">
+            <div class="selected-product-img">
                 <img src="{{ r[4] }}" alt="{{ r[1] }}" class="p-5">
             </div>
             <div class="selected-product-info p-5 text-left">
-                <h5>{{ r[2] }}</h5> <!-- supplier -->
-                <h2 class="font-weight-bold display-4 text-uppercase">{{ r[1] }}</h2> <!-- product name -->
-                <h3>{{ r[3] }} SEK</h3>
+                <h4 class="font-weight-bold text-uppercase">{{ r[1] }}</h2> <!-- product name -->
+                <h3 class="font-weight-bold display-4">{{ r[3] }} SEK</h3>
                 <form method="post" action="{{ url_for('product.add_to_cart', product_id=r[0]) }}">
                     <div class="add-to-cart-field mt-5">
-                        <div class="quantity">
+                        <div class="quantity p-2">
                             <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>
                             <input id="quantity" min="1" max="10" name="quantity" value="1" type="number" readonly>
                             <button class="btn add-btn" type="button" onclick="increment()">+</button>

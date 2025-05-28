@@ -140,8 +140,21 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 .quantity > button {
-    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9dddd;
+    color: #4b4343;
+    font-size: 30px;
+}
+
+.quantity > button:hover {
+    background-color: #cfbbbb;
+    transition: 0.3s;
 }
 
 /* cart */
@@ -352,5 +365,24 @@ input[type=number]::-webkit-outer-spin-button {
         flex-direction: column;
         justify-content: space-between;
         color: #111;
+    }
+
+    /* product page */
+    .selected-product {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        height: 300px;
+        margin: 0;
+    }
+
+    .selected-product-img > img {
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    .selected-product-info > h2 {
+        font-size: 40px;
     }
 }

@@ -16,7 +16,6 @@
               <tr class="text-uppercase order-table-th">
                 <th>ID</th>
                 <th>Date</th>
-                <th>Items</th>
                 <th>Total</th>
                 <th>Status</th>
               </tr>
@@ -24,7 +23,6 @@
               <tr>
                 <td><a href="{{ url_for('user_profile.user_order_details', order_id=order_info[0]) }}">{{ order_info[0] }}</a></td>
                 <td>{{ order_info[1] }}</td>
-                <td>{{ order_info[2] }}</td>
                 <td>{{ order_info[3] }} SEK</td>
                 <td>{{ order_info[4] }}</td>
               </tr>

@@ -20,11 +20,13 @@
 
             <a class="brand-icon ml-2" href="{{url_for('index')}}">OnlineStore</a>
 
+            {% block search %}
             <div class="search-container mx-auto">
                 <form method="GET" action="{{ url_for('search') }}" class="form-inline">
                     <input class="form-control" id="search-field" name="query" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
+            {% endblock %}
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav">

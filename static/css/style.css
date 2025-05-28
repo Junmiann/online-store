@@ -88,7 +88,6 @@
     flex-direction: column;
     justify-content: space-between;
     color: #111;
-    margin-bottom: 1em;
 }
 
 .product-info > .product-price {
@@ -357,7 +356,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     .product {
         width: 20em;
-        height: 15em;
+        height: 18em;
         margin: 1em;
     }
 

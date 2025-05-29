@@ -3,13 +3,13 @@
 {% include 'shared/layout.html' %}
 
 {% block content %}
-    <div class="container text-center">
+    <div class="container selected-product-container text-center">
         {% for r in selected_product %}
-        <div class="selected-product mt-5">
+        <div class="selected-product">
             <div class="selected-product-img">
-                <img src="{{ r[4] }}" alt="{{ r[1] }}" class="p-5">
+                <img src="{{ r[4] }}" alt="{{ r[1] }}">
             </div>
-            <div class="selected-product-info p-5 text-left">
+            <div class="selected-product-info text-left">
                 <h4 class="font-weight-bold text-uppercase">{{ r[1] }}</h2> <!-- product name -->
                 <h3 class="font-weight-bold display-4">{{ r[3] }} SEK</h3>
                 <form method="post" action="{{ url_for('product.add_to_cart', product_id=r[0]) }}">

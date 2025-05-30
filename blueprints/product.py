@@ -30,7 +30,7 @@ def add_to_cart(product_id):
 
         if product_quantity > available_quantity:
             flash("Can't add product(s): Requested quantity exceeds available quantity")
-            return redirect(url_for("product", product_id=product_id))
+            return redirect(url_for("product.product", product_id=product_id))
 
         cur.callproc("check_product_in_cart", [order_id, product_id])
         existing_product = cur.fetchall()
@@ -43,4 +43,4 @@ def add_to_cart(product_id):
         con.commit()
         cur.close()
 
-        return redirect(url_for("index"))
+        return redirect(url_for("product.product", product_id=product_id))

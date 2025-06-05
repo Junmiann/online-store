@@ -49,7 +49,7 @@ def remove_item_from_cart(product_id):
     cur.callproc("delete_product", [order_id, product_id])
     con.commit()
     cur.close()
-
+    
     return redirect(url_for("cart.cart"))
 
 @cart_bp.route("/cart/order_check_out/<int:order_id>", methods=["POST"])

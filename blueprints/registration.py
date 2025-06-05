@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, Blueprint
+from flask import Flask, render_template, flash, redirect, url_for, request, Blueprint
 from db import *
 from werkzeug.security import generate_password_hash
 
@@ -28,4 +28,5 @@ def register_form():
         con.commit()
         cur.close()
 
+        flash("Registration successful!\nYou may now log in.")
         return redirect(url_for("login.login"))

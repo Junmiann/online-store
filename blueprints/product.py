@@ -43,4 +43,5 @@ def add_to_cart(product_id):
         con.commit()
         cur.close()
 
+        flash("The product has been added to cart!")
         return redirect(url_for("product.product", product_id=product_id))

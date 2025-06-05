@@ -25,4 +25,4 @@ setTimeout(function(){
     if (msg) {
         msg.style.display = "none";
     }
-}, 4000);
+}, 3000);

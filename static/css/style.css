@@ -258,6 +258,10 @@ input[type=number]::-webkit-outer-spin-button {
     transition: 0.3s;
 }
 
+.confirmation-msg > img {
+    width: 10em;
+}
+
 /* user profile */
 .welcome-msg {
     border-bottom: 1px solid #777;

@@ -74,6 +74,4 @@ def order_check_out(order_id):
         cur.callproc("order_check_out", [user[0], order_id])
         con.commit()
         cur.close()
-
-        flash("Your purchase was successful!")
-        return redirect(url_for("cart.cart"))
+        return render_template("/cart.html", checkout_success=True, user=session.get("user"))

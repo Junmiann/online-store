@@ -14,7 +14,7 @@ def check_order_status():
 
     if user:
         cur = con.cursor()
-        cur.callproc("check_order_status", [user[0], 'P'])
+        cur.callproc("check_order_status", [user[0], 'Pending'])
         order_status = cur.fetchone()
 
         if order_status:

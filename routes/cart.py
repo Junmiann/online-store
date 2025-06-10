@@ -39,14 +39,8 @@ def remove_item_from_cart(product_id):
     """
     order_id = check_order_status()
 
-    cur = con.cursor()
-
-    cur.callproc("get_product_by_id", [product_id])
-    cur.fetchall()
-
-    cur.callproc("delete_product", [order_id, product_id])
-    con.commit()
-    cur.close()
+    Cart.get_product(con, product_id)
+    Cart.delete_product(con, order_id, product_id)
     
     return redirect(url_for("cart.cart"))
 

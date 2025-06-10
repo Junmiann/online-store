@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, redirect, url_for, session, Blu
 from db import *
 from utils import *
 from models.userOrder import UserOrder
+from models.cart import Cart
 
 app = Flask(__name__)
 
@@ -55,10 +56,8 @@ def order_check_out(order_id):
     Process check out for the order with the given order_id
     """
     user = session.get("user")
-
     order_id = check_order_status()
 
-    cur = con.cursor()
     user_orders_details = UserOrder.get_user_order_details(con, order_id)
     order_sum = user_orders_details[0][2]
 
@@ -67,7 +66,5 @@ def order_check_out(order_id):
         return redirect(url_for("cart.cart"))
     
     else: 
-        cur.callproc("order_check_out", [user[0], order_id])
-        con.commit()
-        cur.close()
+        Cart.check_out(con, user[0], order_id)
         return render_template("/cart.html", checkout_success=True, user=session.get("user"))

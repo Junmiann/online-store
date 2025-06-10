@@ -28,7 +28,7 @@
     box-sizing: border-box;
 }
 
-.brand-icon > img {
+.brand-icon {
     width: 5em;
     height: 5em;
 }
@@ -374,6 +374,71 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 1.5em 0 0.7em 0;
     padding: 1em;
     border-radius: 10px;
+}
+
+/* admin dashboard*/
+.admin_navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 15em;
+    display: flex;
+    flex-direction: column;
+    background-color: #E9EBEC;
+    padding: 2em;
+    align-items: center;
+}
+
+.admin_navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.admin_navbar li {
+    margin-top: 1em;
+}
+
+.admin_navbar li a svg {
+    margin-right: 1em;
+}
+
+.admin_navbar li a {
+    display: block;
+    text-decoration: none;
+    padding: 0.7em;
+    border-radius: 5px;
+    color: #000;
+}
+
+.admin_navbar li a:hover {
+    background-color: #D6DADD;
+    transition: 0.3s;
+}
+
+.admin_navbar ul li.active {
+    background-color: #D6DADD;
+    border-radius: 5px;
+}
+
+#admin-logout-button {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    background-color: #A9B9C5;
+    padding: 0.7em;
+    border-radius: 5px;
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+}
+
+#admin-logout-button:hover {
+    background-color: #526D82;
+    color: #EEE;
+    transition: 0.4s;
 }
 
 /* tablet, laptop size */

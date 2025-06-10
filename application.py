@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, request, session
+from flask import Flask, render_template, session
 from db import *
 from routes import *
 from utils import *
@@ -13,6 +13,7 @@ app.register_blueprint(registration_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(user_profile_bp)
 app.register_blueprint(cart_bp)
+app.register_blueprint(admin_dashboard_bp)
 
 @app.route("/")
 def index():

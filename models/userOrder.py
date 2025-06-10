@@ -1,4 +1,4 @@
-class UserProfileService:
+class UserOrder:
     @staticmethod
     def get_user_orders(con, user, order_id):
         """

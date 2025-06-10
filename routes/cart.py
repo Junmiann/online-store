@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, Blueprint
 from db import *
 from utils import *
+from models.userOrder import UserOrder
 
 app = Flask(__name__)
 
@@ -19,17 +20,13 @@ def cart():
             list_products = sp_all_products()
 
             # Get order details and products from DB
-            cur = con.cursor()
-            cur.callproc("get_order_details", [order_id])
-            user_order = cur.fetchall()
-
-            cur.callproc("get_order_products", [order_id])
-            user_order_products = cur.fetchall()
+            user_orders_details = UserOrder.get_user_order_details(con, order_id)
+            user_order_products = UserOrder.get_user_order_products(con, order_id)
 
             # Render shopping cart page with all data
-            return render_template("/cart.html", user=user, order_id=order_id, list_products=list_products, user_order=user_order, user_order_products=user_order_products)
+            return render_template("/cart.html", user=user, order_id=order_id, list_products=list_products, user_orders_details=user_orders_details, user_order_products=user_order_products)
         else:
-            render_template("/cart.html", user=user)
+            return render_template("/cart.html", user=user)
     else:
         flash("Log in to check your shopping cart!")
         return redirect(url_for("login.login"))
@@ -62,9 +59,8 @@ def order_check_out(order_id):
     order_id = check_order_status()
 
     cur = con.cursor()
-    cur.callproc("get_order_details", order_id)
-    order_details = cur.fetchall()
-    order_sum = order_details[0][2]
+    user_orders_details = UserOrder.get_user_order_details(con, order_id)
+    order_sum = user_orders_details[0][2]
 
     if order_sum == 0:
         flash("Please add an item into the cart before checking out!")

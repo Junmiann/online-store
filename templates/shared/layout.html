@@ -28,7 +28,7 @@
             <!-- search bar -->
             {% block search %}
             <div class="search-container mx-auto">
-                <form method="GET" action="{{ url_for('search.search') }}" class="form-inline" id="search-form">
+                <form method="GET" action="{{ url_for('product.search') }}" class="form-inline" id="search-form">
                     <input class="form-control" id="search-field" name="query" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>

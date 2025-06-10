@@ -8,7 +8,6 @@ app = Flask(__name__)
 order_id = None
 
 app.register_blueprint(product_bp)
-app.register_blueprint(search_bp)
 app.register_blueprint(registration_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(user_profile_bp)

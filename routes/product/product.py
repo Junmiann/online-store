@@ -11,7 +11,7 @@ def product(product_id):
     cur = con.cursor()
     cur.callproc("get_product_by_id", [product_id])
     selected_product = cur.fetchall()
-    return render_template("product.html", product_id=product_id, selected_product=selected_product)
+    return render_template("/product/product.html", product_id=product_id, selected_product=selected_product)
 
 @product_bp.route("/add_to_cart/<int:product_id>", methods=["POST"])
 def add_to_cart(product_id):
@@ -45,3 +45,19 @@ def add_to_cart(product_id):
 
         flash("The product has been added to cart!")
         return redirect(url_for("product.product", product_id=product_id))
+
+@product_bp.route("/search")
+def search():
+    query = request.args.get('query', '')
+
+    cur = con.cursor()
+    cur.callproc("search_products", [query])
+    search_results = cur.fetchall()
+    cur.close()
+
+    if search_results:
+        product_id = search_results[0][0]
+        return redirect(url_for("product.product", product_id=product_id))
+    else:
+        flash("No products found matching the query")
+        return redirect(url_for("index"))

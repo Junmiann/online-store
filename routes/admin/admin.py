@@ -19,4 +19,4 @@ def admin_dashboard(section):
     rows = cur.fetchall()
     cur.close()
 
-    return render_template("admin_dashboard.html", section=section, table_headers=headers, table_data=rows)
+    return render_template("/admin/dashboard.html", section=section, table_headers=headers, table_data=rows)

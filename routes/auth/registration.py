@@ -8,7 +8,7 @@ registration_bp = Blueprint('registration', __name__, url_prefix='')
 
 @registration_bp.route("/registration")
 def registration():
-    return render_template("registration.html")
+    return render_template("/auth/registration.html")
 
 @registration_bp.route("/register_form", methods=["POST"])
 def register_form():

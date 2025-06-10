@@ -21,7 +21,11 @@ def login_form():
 
     if user and check_password_hash(user[4] , user_password):
         session["user"] = user
-        return redirect(url_for("index"))
+        if user[9] is False:
+            return redirect(url_for("index"))
+        else:
+            return redirect(url_for("admin_dashboard.admin_dashboard", section="orders"))
+
     else:
         flash("Invalid credentials, please try again!")
         return redirect(url_for("login.login"))

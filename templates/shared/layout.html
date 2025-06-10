@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Rambla:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     </head>
     <body>
+        {% block navbar %}
         <nav class="navbar navbar-expand-md p-4 mb-4">
             <div>
                 <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +65,7 @@
                 </ul>
             </div>
         </nav>
+        {% endblock %}
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}

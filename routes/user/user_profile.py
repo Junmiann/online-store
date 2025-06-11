@@ -22,7 +22,7 @@ def user_order_details(order_id):
     user = session.get("user")
     user_orders_details = UserOrder.get_user_order_details(con, order_id)
     user_order_products = UserOrder.get_user_order_products(con, order_id)
-    return render_template("/user/order_details.html", user=user, order_id=order_id, user_orders=user_orders_details, user_order_products=user_order_products)
+    return render_template("/user/order_details.html",user=user, order_id=order_id, user_orders=user_orders_details, user_order_products=user_order_products)
 
 @user_profile_bp.route("/logout")
 def logout():

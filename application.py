@@ -13,6 +13,7 @@ app.register_blueprint(login_bp)
 app.register_blueprint(user_profile_bp)
 app.register_blueprint(cart_bp)
 app.register_blueprint(admin_dashboard_bp)
+app.register_blueprint(orders_bp)
 
 @app.route("/")
 def index():

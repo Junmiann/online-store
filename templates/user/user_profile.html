@@ -23,7 +23,7 @@
               </tr>
               {% for order_info in user_orders %}
               <tr>
-                <td><a href="{{ url_for('user_profile.user_order_details', order_id=order_info[0]) }}">{{ order_info[0] }}</a></td>
+                <td><a href="{{ url_for('orders.user_order_details', order_id=order_info[0]) }}">{{ order_info[0] }}</a></td>
                 <td>{{ order_info[1] }}</td>
                 <td>{{ order_info[3] }} SEK</td>
                 <td>{{ order_info[4] }}</td>

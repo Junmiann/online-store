@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         {% if order_id %}
-            <h1 class="text-uppercase font-weight-bold text-center mb-3">Order details</h1>
+            <h1 class="text-uppercase font-weight-bold mb-3 pt-4">Order details</h1>
             {% for order_info in user_orders %}
             <div class="order" id="order-quick-info">
                 <table>
@@ -26,12 +26,22 @@
             {% for product in user_order_products %}
                 <div class="cart-products p-4">
                     <div class="cart-product-img">
-                        <a href="{{ url_for('product.product', product_id=product[4]) }}">
+                        {% if user[9] %}
                             <img src="{{ product[0] }}" alt="{{ product[1] }}">
-                        </a>
+                        {% else %}
+                            <a href="{{ url_for('product.product', product_id=product[4]) }}">
+                                <img src="{{ product[0] }}" alt="{{ product[1] }}">
+                            </a>
+                        {% endif %}
                     </div>
                     <div class="cart-product-details">
-                        <p class="font-weight-bold"><a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a></p>
+                        {% if user[9] %}
+                            <p class="font-weight-bold">{{ product[1] }}</p>
+                        {% else %}
+                            <p class="font-weight-bold">
+                                <a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a>
+                            </p>
+                        {% endif %}
                         <p><span class="cart-product-quantity font-italic">Quantity:</span> {{ product[2] }}</p>
                         <p class="font-weight-bold">{{ product[3] }} SEK</p>
                     </div>

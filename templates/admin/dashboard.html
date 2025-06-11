@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container p-4">
-        <h2 class="text-uppercase font-weight-bold">{{ section|capitalize }}</h2>
+        <h1 class="text-uppercase font-weight-bold">{{ section|capitalize }}</h1>
         <div class="order">
             <table border="1">
                 <tr>
@@ -19,7 +19,7 @@
                     {% for item in row %}
                     <td class="text-center">
                         {% if loop.index0 == 0 and section == 'orders' %}
-                            <a href="{{ url_for('user_profile.user_order_details', order_id=item) }}">{{ item }}</a>
+                            <a href="{{ url_for('orders.user_order_details', order_id=item) }}">{{ item }}</a>
                         {% elif item is string and item.startswith('http') %}
                             <img src="{{ item }}" alt="product image" width="100">
                         {% else %}

@@ -211,7 +211,7 @@ input[type=number]::-webkit-outer-spin-button {
 .cart-product-img {
     width: 30%;
 }
-.cart-product-img > a > img {
+.cart-product-img img {
     max-width: 100px;
     max-height: 100px;
 }
@@ -686,7 +686,7 @@ input[type=number]::-webkit-outer-spin-button {
         max-width: 30%;
     }
 
-    .cart-product-img > a > img {
+    .cart-product-img img {
         max-width: 100%;
     }
 

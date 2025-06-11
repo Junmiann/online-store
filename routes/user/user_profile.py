@@ -17,13 +17,6 @@ def user_profile():
         user_orders = UserOrder.get_user_orders(con, user[0], order_id)
         return render_template("/user/user_profile.html", user=user, user_orders=user_orders)
 
-@user_profile_bp.route("/user_profile/order_details/<int:order_id>")
-def user_order_details(order_id):
-    user = session.get("user")
-    user_orders_details = UserOrder.get_user_order_details(con, order_id)
-    user_order_products = UserOrder.get_user_order_products(con, order_id)
-    return render_template("/user/order_details.html",user=user, order_id=order_id, user_orders=user_orders_details, user_order_products=user_order_products)
-
 @user_profile_bp.route("/logout")
 def logout():
     session.pop("user", None)

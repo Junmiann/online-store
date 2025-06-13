@@ -6,7 +6,12 @@
     <div class="container">
         {% if order_id %}
             <h1 class="text-uppercase font-weight-bold mb-3 pt-4">Order details</h1>
-            {% for order_info in user_orders %}
+            {% if user[9] %}
+                <button class="btn btn-primary mb-2">
+                    Confirm order
+                </button>
+            {% endif %}
+            {% for order_info in user_orders_details %}
             <div class="order" id="order-quick-info">
                 <table>
                     <tr class="text-uppercase">

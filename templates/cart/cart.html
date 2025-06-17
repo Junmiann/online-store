@@ -60,7 +60,7 @@
                         
                         <!-- Check out button -->
                         <div class="mt-4 text-center">
-                            <form method="POST" action="{{ url_for('cart.order_check_out', order_id=order_detail[0]) }}" onclick="showCheckOutPopUp()">
+                            <form method="POST" action="{{ url_for('orders.order_check_out', order_id=order_detail[0]) }}" onclick="showCheckOutPopUp()">
                                 <button type="submit" class="check-out-btn p-4 font-weight-bold">Check out</button>
                             </form>
                         </div>

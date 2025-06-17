@@ -45,12 +45,7 @@ def add_to_cart(product_id):
 
         product_quantity = int(request.form["quantity"])
         cur.callproc("get_product_by_id", [product_id])
-        available_quantity = cur.fetchone()[6]
-
-        if product_quantity > available_quantity:
-            flash("Can't add product(s): Requested quantity exceeds available quantity")
-            return redirect(url_for("product.product", product_id=product_id))
-
+        
         cur.callproc("check_product_in_cart", [order_id, product_id])
         existing_product = cur.fetchall()
         if existing_product:
@@ -76,22 +71,3 @@ def remove_item_from_cart(product_id):
     Cart.delete_product(con, order_id, product_id)
     
     return redirect(url_for("cart.cart"))
-
-@cart_bp.route("/cart/order_check_out/<int:order_id>", methods=["POST"])
-def order_check_out(order_id):
-    """
-    Process check out for the order with the given order_id
-    """
-    user = session.get("user")
-    order_id = check_order_status()
-
-    user_orders_details = UserOrder.get_user_order_details(con, order_id)
-    order_sum = user_orders_details[0][2]
-
-    if order_sum == 0:
-        flash("Please add an item into the cart before checking out!")
-        return redirect(url_for("cart.cart"))
-    
-    else: 
-        Cart.check_out(con, user[0], order_id)
-        return render_template("/cart/cart.html", checkout_success=True, user=session.get("user"))

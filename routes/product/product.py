@@ -26,7 +26,7 @@ def add_to_cart(product_id):
 
         product_quantity = int(request.form["quantity"])
         cur.callproc("get_product_by_id", [product_id])
-        available_quantity = cur.fetchone()[5]
+        available_quantity = cur.fetchone()[6]
 
         if product_quantity > available_quantity:
             flash("Can't add product(s): Requested quantity exceeds available quantity")

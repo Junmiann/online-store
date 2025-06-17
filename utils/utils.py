@@ -1,9 +1,9 @@
 from flask import session
 from db import *
 
-def sp_all_products():
+def all_products():
     cur = con.cursor()
-    cur.callproc("sp_all_products")
+    cur.callproc("all_products")
     list_products = cur.fetchall()
     cur.close()
     return list_products

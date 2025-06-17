@@ -9,12 +9,12 @@
         <div class="product">
           <a href="{{ url_for('product.product', product_id=product[0]) }}">
             <div class="product-img">
-                <img src="{{ product[4] }}" alt="{{ product[1] }}" class="w-auto h-auto" draggable="false">
+                <img src="{{ product[3] }}" alt="{{ product[1] }}" class="w-auto h-auto" draggable="false">
             </div>
           </a> 
           <div class="product-info">
               <p class="m-0 mt-2">{{ product[1] }}</p> <!-- product name -->
-              <p class="font-weight-bold product-price mb-2">{{ product[3] }} SEK</p>
+              <p class="font-weight-bold product-price mb-2">{{ product[5] }} SEK</p>
           </div>
         </div>
       {% endfor %}

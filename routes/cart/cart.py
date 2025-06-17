@@ -18,7 +18,7 @@ def cart():
 
         if order_id:
             # Get all products (to display the added products into the cart)
-            list_products = sp_all_products()
+            list_products = all_products()
 
             # Get order details and products from DB
             user_orders_details = UserOrder.get_user_order_details(con, order_id)

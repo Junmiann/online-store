@@ -387,6 +387,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* admin dashboard*/
+.container.admin-container {
+    margin-left: 16em;
+}
+
 .admin_navbar {
     position: fixed;
     top: 0;

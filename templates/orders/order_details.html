@@ -3,13 +3,19 @@
 {% block title %}OnlineStore │ Order details{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container admin-container">
         {% if order_id %}
             <h1 class="text-uppercase font-weight-bold mb-3 pt-4">Order details</h1>
             {% if user[9] %}
-                <button class="btn btn-primary mb-2">
-                    Confirm order
-                </button>
+                <form method="post" action="#">
+                    <label for="status">Orderstatus:</label>
+                    <select name="status" id="status" class="form-control">
+                        <option value="confirmed">Confirmed</option>
+                        <option value="shipped">Shipped</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2">Update</button>
+                </form>
+
             {% endif %}
             {% for order_info in user_orders_details %}
             <div class="order" id="order-quick-info">

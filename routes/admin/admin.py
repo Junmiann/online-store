@@ -15,7 +15,7 @@ def admin_dashboard(section):
         headers = ["Order ID", "Date", "Total", "Customer ID", "Status"]
     elif section == "products":
         cur.callproc("all_products")
-        headers = ["Product ID", "Name", "Image", "Quantity", "Price", "Supplier ID"]
+        headers = ["Product ID", "Name", "Description","Image", "Quantity", "Price", "Supplier ID"]
 
     rows = cur.fetchall()
     cur.close()

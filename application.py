@@ -17,7 +17,7 @@ app.register_blueprint(orders_bp)
 
 @app.route("/")
 def index():
-    list_products = sp_all_products()
+    list_products = all_products()
     user = session.get("user")
     return render_template("index.html", list_products=list_products, user=user)
 

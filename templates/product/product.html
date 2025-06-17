@@ -13,7 +13,7 @@
                 <h4 class="font-weight-bold text-uppercase">{{ product_info[1] }}</h4> <!-- product name -->
                 <h3 class="font-weight-bold display-4">{{ product_info[4] }} SEK</h3>
                 <p class="text-justify">{{ product_info[2] }}</p>
-                <form method="post" action="{{ url_for('product.add_to_cart', product_id=product_info[0]) }}">
+                <form method="post" action="{{ url_for('cart.add_to_cart', product_id=product_info[0]) }}">
                     <div class="add-to-cart-field mt-5">
                         <div class="quantity p-2">
                             <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>

@@ -25,9 +25,9 @@ def cart():
             user_order_products = UserOrder.get_user_order_products(con, order_id)
 
             # Render shopping cart page with all data
-            return render_template("/cart/cart.html", user=user, order_id=order_id, list_products=list_products, user_orders_details=user_orders_details, user_order_products=user_order_products)
+            return render_template("/cart.html", user=user, order_id=order_id, list_products=list_products, user_orders_details=user_orders_details, user_order_products=user_order_products)
         else:
-            return render_template("/cart/cart.html", user=user)
+            return render_template("/cart.html", user=user)
     else:
         flash("Log in to check your shopping cart!")
         return redirect(url_for("login.login"))

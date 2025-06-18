@@ -13,7 +13,7 @@ def user_order_details(order_id):
     user = session.get("user")
     user_orders_details = UserOrder.get_user_order_details(con, order_id)
     user_order_products = UserOrder.get_user_order_products(con, order_id)
-    return render_template("/orders/order_details.html", user=user, order_id=order_id, user_orders=user_orders_details, user_order_products=user_order_products)
+    return render_template("/order_details.html", user=user, order_id=order_id, user_orders=user_orders_details, user_order_products=user_order_products)
 
 @orders_bp.route("/order_check_out/<int:order_id>", methods=["POST"])
 def order_check_out(order_id):
@@ -32,4 +32,4 @@ def order_check_out(order_id):
     
     else: 
         Cart.check_out(con, user[0], order_id)
-        return render_template("/cart/cart.html", checkout_success=True, user=session.get("user"))
+        return render_template("/cart.html", checkout_success=True, user=session.get("user"))

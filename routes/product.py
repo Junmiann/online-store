@@ -11,7 +11,7 @@ def product(product_id):
     cur = con.cursor()
     cur.callproc("get_product_by_id", [product_id])
     selected_product = cur.fetchall()
-    return render_template("/product/product.html", product_id=product_id, selected_product=selected_product)
+    return render_template("/product.html", product_id=product_id, selected_product=selected_product)
 
 @product_bp.route("/search")
 def search():

@@ -15,7 +15,7 @@ def user_profile():
     else:
         order_id = check_order_status()
         user_orders = UserOrder.get_user_orders(con, user[0], order_id)
-        return render_template("/user/user_profile.html", user=user, user_orders=user_orders)
+        return render_template("/user_profile.html", user=user, user_orders=user_orders)
 
 @user_profile_bp.route("/logout")
 def logout():

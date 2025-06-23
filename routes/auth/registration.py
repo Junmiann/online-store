@@ -12,17 +12,29 @@ def registration():
 
 @registration_bp.route("/register_form", methods=["POST"])
 def register_form():
-        user = User(
-              request.form["firstname"],
-              request.form["lastname"],
-              request.form["email"],
-              request.form["password"],
-              request.form["phone"],
-              request.form["address"],
-              request.form["city"],
-              request.form["country"]
-        )
-        user.save_user_to_db(con)
+        email = request.form["email"]
 
-        flash("Registration successful!\nYou may now log in.")
-        return redirect(url_for("login.login"))
+        cur = con.cursor()
+        cur.callproc("get_user_by_email", [email])
+        existing_email = cur.fetchone()
+
+        if existing_email:
+            # TODO (future improvement): Enhance this by checking if the email exists using JavaScript (AJAX),
+            # so the page doesn't need to refresh when an existing email is entered.
+            flash("The entered email already exists!")
+            return redirect(url_for("registration.registration"))
+        else:
+            user = User(
+                request.form["firstname"],
+                request.form["lastname"],
+                request.form["email"],
+                request.form["password"],
+                request.form["phone"],
+                request.form["address"],
+                request.form["city"],
+                request.form["country"]
+            )
+            user.save_user_to_db(con)
+
+            flash("Registration successful!\nYou may now log in.")
+            return redirect(url_for("login.login"))

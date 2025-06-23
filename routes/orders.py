@@ -11,9 +11,10 @@ orders_bp = Blueprint('orders', __name__, url_prefix='')
 @orders_bp.route("/orders/order_details/<int:order_id>")
 def user_order_details(order_id):
     user = session.get("user")
+    is_admin = user[9] == True
     user_orders_details = UserOrder.get_user_order_details(con, order_id)
     user_order_products = UserOrder.get_user_order_products(con, order_id)
-    return render_template("/order_details.html", user=user, order_id=order_id, user_orders=user_orders_details, user_order_products=user_order_products)
+    return render_template("/order_details.html", user=user, order_id=order_id, user_orders=user_orders_details, user_order_products=user_order_products, is_admin=is_admin)
 
 @orders_bp.route("/order_check_out/<int:order_id>", methods=["POST"])
 def order_check_out(order_id):

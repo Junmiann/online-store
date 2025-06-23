@@ -5,32 +5,97 @@
 {% block search %}{% endblock %}
 
 {% block content %}
-    <div class="container p-4">
+    <div class="container admin-container p-4">
         <h1 class="text-uppercase font-weight-bold">{{ section|capitalize }}</h1>
         <div class="order">
             <table border="1">
                 <tr>
-                {% for header in table_headers %}
-                    <th class="text-center">{{ header }}</th>
-                {% endfor %}
+                    {% for header in table_headers %}
+                        <th class="text-center">{{ header }}</th>
+                    {% endfor %}
+                    {% if section == 'products' %}
+                        <th class="text-center">Action</th>
+                    {% endif %}
                 </tr>
+
                 {% for row in table_data %}
                 <tr>
                     {% for item in row %}
-                    <td class="text-center">
-                        {% if loop.index0 == 0 and section == 'orders' %}
-                            <a href="{{ url_for('orders.user_order_details', order_id=item) }}">{{ item }}</a>
-                        {% elif item is string and item.startswith('http') %}
-                            <img src="{{ item }}" alt="product image" width="100">
-                        {% else %}
-                            {{ item }}
-                        {% endif %}
-                    </td>
+                        <td class="text-center">
+                            {% if loop.index0 == 0 and section == 'orders' %}
+                                <a href="{{ url_for('orders.user_order_details', order_id=item) }}">{{ item }}</a>
+                            {% elif item is string and item.startswith('http') %}
+                                <img src="{{ item }}" alt="product image" width="100">
+                            {% else %}
+                                {{ item }}
+                            {% endif %}
+                        </td>
                     {% endfor %}
+
+                    {% if section == 'products' %}
+                        <td class="text-center">
+                            <button class="btn btn-primary edit-btn"
+                                    data-toggle="modal"
+                                    data-target="#editModal"
+                                    data-id="{{ row[0] }}"
+                                    data-name="{{ row[1] }}"
+                                    data-image="{{ row[2] }}"
+                                    data-quantity="{{ row[3] }}"
+                                    data-price="{{ row[4] }}"
+                                    data-supplier="{{ row[5] }}">
+                                Edit
+                            </button>
+                        </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
+
             </table>
         </div>
         
+        <!-- Modal for products -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="POST" action="/admin/products/edit"> <!-- !! Have to connect this to Flask !! -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Product details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Stäng">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <input type="hidden" name="product_id" id="modalProductId">
+
+                            <div class="form-group">
+                                <label for="modalName">Name</label>
+                                <input type="text" class="form-control" name="name" id="modalName">
+                            </div>
+                            <div class="form-group">
+                                <label for="modalImage">Image</label>
+                                <input type="text" class="form-control" name="image" id="modalImage">
+                            </div>
+                            <div class="form-group">
+                                <label for="modalQuantity">Quantity</label>
+                                <input type="number" class="form-control" name="quantity" id="modalQuantity">
+                            </div>
+                            <div class="form-group">
+                                <label for="modalPrice">Price</label>
+                                <input type="number" class="form-control" name="price" id="modalPrice" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label for="modalSupplier">Supplier ID</label>
+                                <input type="text" class="form-control" name="supplier_id" id="modalSupplier">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

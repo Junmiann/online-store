@@ -26,3 +26,18 @@ setTimeout(function(){
         msg.style.display = "none";
     }
 }, 3000);
+
+// Modal
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit-btn');
+    editButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        document.getElementById('modalProductId').value = this.dataset.id;
+        document.getElementById('modalName').value = this.dataset.name;
+        document.getElementById('modalImage').value = this.dataset.image;
+        document.getElementById('modalQuantity').value = this.dataset.quantity;
+        document.getElementById('modalPrice').value = this.dataset.price;
+        document.getElementById('modalSupplier').value = this.dataset.supplier;
+      });
+    });
+  });

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for, request, session, Blueprint
 from db import *
 from werkzeug.security import check_password_hash
+from utils import *
 
 app = Flask(__name__)
 
@@ -19,9 +20,12 @@ def login_form():
     cur.callproc("get_user_by_email", [user_email])
     user = cur.fetchone()
 
-    if user and check_password_hash(user[4] , user_password):
+    if user and check_password_hash(user[4], user_password):
         session["user"] = user
-        if user[9] is False:
+
+        _, _, _, is_admin = utils.user_details()
+
+        if not is_admin:
             return redirect(url_for("index"))
         else:
             return redirect(url_for("admin_dashboard.admin_dashboard", section="orders"))

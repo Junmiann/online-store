@@ -13,9 +13,10 @@ def user_profile():
     if user is None:
         return redirect(url_for("login.login"))
     else:
+        user_id, user_name ,_ ,_ = utils.user_details()
         order_id = check_order_status()
-        user_orders = UserOrder.get_user_orders(con, user[0], order_id)
-        return render_template("/user_profile.html", user=user, user_orders=user_orders)
+        user_orders = UserOrder.get_user_orders(con, user_id, order_id)
+        return render_template("/user_profile.html", user=user, user_name=user_name, user_orders=user_orders)
 
 @user_profile_bp.route("/logout")
 def logout():

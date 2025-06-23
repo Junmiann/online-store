@@ -8,6 +8,15 @@ def all_products():
     cur.close()
     return list_products
 
+def user_details():
+    user = session.get("user")
+    
+    user_id = user[0]
+    user_name = user[1]
+    user_email = user[4]
+    is_admin = user[9]
+    return user_id, user_name, user_email, is_admin
+
 def check_order_status():
     global order_id
     user = session.get("user")

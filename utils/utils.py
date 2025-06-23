@@ -15,7 +15,7 @@ def user_details():
     user_name = user[1]
     user_email = user[4]
     is_admin = user[9]
-    return user_id, user_name, user_email, is_admin
+    return user, user_id, user_name, user_email, is_admin
 
 def check_order_status():
     global order_id

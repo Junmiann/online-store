@@ -23,7 +23,7 @@ def login_form():
     if user and check_password_hash(user[4], user_password):
         session["user"] = user
 
-        _, _, _, is_admin = utils.user_details()
+        _, _, _, _, is_admin = utils.user_details()
 
         if not is_admin:
             return redirect(url_for("index"))

@@ -9,11 +9,10 @@ user_profile_bp = Blueprint('user_profile', __name__, url_prefix='')
 
 @user_profile_bp.route("/user_profile")
 def user_profile():
-    user = session.get("user")
+    user, user_id, user_name ,_ ,_ = utils.user_details()
     if user is None:
         return redirect(url_for("login.login"))
     else:
-        user_id, user_name ,_ ,_ = utils.user_details()
         order_id = check_order_status()
         user_orders = UserOrder.get_user_orders(con, user_id, order_id)
         return render_template("/user_profile.html", user=user, user_name=user_name, user_orders=user_orders)

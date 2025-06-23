@@ -9,7 +9,7 @@
             {% if is_admin %}
                 {% for order_info in user_orders %}
                     <form method="post" action="#">
-                        <label for="status">Current orderstatus: <strong>{{ order_info[3] }}</strong></label>
+                        <label for="status">Current orderstatus: <strong>{{ order_status }}</strong></label>
                         <select name="status" id="status" class="form-control">
                             <option value="confirmed">Confirmed</option>
                             <option value="shipped">Shipped</option>
@@ -28,9 +28,9 @@
                         <th>Total</th>
                     </tr>
                     <tr>
-                        <td>{{ order_info[0] }}</td>
-                        <td>{{ order_info[1] }}</td>
-                        <td>{{ order_info[2] }} SEK</td>
+                        <td>{{ order_id }}</td>
+                        <td>{{ order_date }}</td>
+                        <td>{{ order_total_price }} SEK</td>
                     </tr>
                 </table>
             </div>
@@ -39,24 +39,24 @@
             {% for product in user_order_products %}
                 <div class="cart-products p-4">
                     <div class="cart-product-img">
-                        {% if user[9] %}
-                            <img src="{{ product[0] }}" alt="{{ product[1] }}">
+                        {% if is_admin %}
+                            <img src="{{ product_img }}" alt="{{ product_name }}">
                         {% else %}
-                            <a href="{{ url_for('product.product', product_id=product[4]) }}">
-                                <img src="{{ product[0] }}" alt="{{ product[1] }}">
+                            <a href="{{ url_for('product.product', product_id=product_id) }}">
+                                <img src="{{ product_img }}" alt="{{ product_name }}">
                             </a>
                         {% endif %}
                     </div>
                     <div class="cart-product-details">
-                        {% if user[9] %}
-                            <p class="font-weight-bold">{{ product[1] }}</p>
+                        {% if is_admin %}
+                            <p class="font-weight-bold">{{ product_name }}</p>
                         {% else %}
                             <p class="font-weight-bold">
-                                <a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a>
+                                <a href="{{ url_for('product.product', product_id=product_id) }}">{{ product_name }}</a>
                             </p>
                         {% endif %}
-                        <p><span class="cart-product-quantity font-italic">Quantity:</span> {{ product[2] }}</p>
-                        <p class="font-weight-bold">{{ product[3] }} SEK</p>
+                        <p><span class="cart-product-quantity font-italic">Quantity:</span> {{ product_quantity }}</p>
+                        <p class="font-weight-bold">{{ product_price }} SEK</p>
                     </div>
                 </div>
             {% endfor %}

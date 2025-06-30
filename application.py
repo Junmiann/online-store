@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, redirect, url_for, session
 from db import *
 from routes import *
 from utils import *
@@ -11,9 +11,12 @@ register_blueprints(app)
 
 @app.route("/")
 def index():
-    list_products = all_products()
     user = session.get("user")
-    return render_template("index.html", list_products=list_products, user=user)
+    if user is None or user[9] == False:
+        list_products = all_products()
+        return render_template("index.html", list_products=list_products, user=user)
+    elif user[9]:
+        return redirect(url_for("admin_dashboard.admin_dashboard", section="orders"))
 
 if __name__ == "__main__":
     secret_key = os.getenv("SECRET_KEY")

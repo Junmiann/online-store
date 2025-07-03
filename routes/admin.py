@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, Blueprint
+from flask import Flask, render_template, session, request, Blueprint, redirect, url_for
 from db import *
 
 app = Flask(__name__)
@@ -21,3 +21,14 @@ def admin_dashboard(section):
     cur.close()
 
     return render_template("/admin_dashboard.html", user=user, section=section, table_headers=headers, table_data=rows)
+
+@admin_dashboard_bp.route("/update_order_status/<int:order_id>", methods=["POST"])
+def update_order_status(order_id):
+    cur = con.cursor()
+
+    updated_order_status = request.form["status"]
+    cur.callproc("update_order_status", [order_id, updated_order_status.capitalize(),])
+    print(updated_order_status)
+    con.commit()
+    cur.close()
+    return redirect(url_for("admin_dashboard.admin_dashboard", section="orders"))

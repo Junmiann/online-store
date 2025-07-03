@@ -1,11 +1,11 @@
 class UserOrder:
     @staticmethod
-    def get_user_orders(con, user, order_id):
+    def get_user_orders(con, user):
         """
         All of the customer's orders (order ID, date, total sum, status)
         """ 
         with con.cursor() as cur:
-            cur.callproc("customer_orders", [user, order_id])
+            cur.callproc("customer_orders", [user])
             user_orders = cur.fetchall()
             return user_orders
     

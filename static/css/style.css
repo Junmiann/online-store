@@ -238,9 +238,6 @@ input[type=number]::-webkit-outer-spin-button {
 .cart-product-details > p > a {
     color: #111;
 }
-.cart-product-quantity {
-    font-size: 13px;
-}
 
 .delete-product-from-cart > svg {
     color: #948787;

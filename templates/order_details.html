@@ -56,7 +56,7 @@
                                 <a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a>
                             </p>
                         {% endif %}
-                        <p><span class="cart-product-quantity font-italic">Quantity:</span> {{ product[2] }}</p>
+                        <p>{{ product[2] }}<span class="cart-product-unit-price"> x {{ product[5] }} </span></p>
                         <p class="font-weight-bold">{{ product[3] }} SEK</p>
                     </div>
                 </div>

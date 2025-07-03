@@ -25,10 +25,25 @@ def admin_dashboard(section):
 @admin_dashboard_bp.route("/update_order_status/<int:order_id>", methods=["POST"])
 def update_order_status(order_id):
     cur = con.cursor()
-
     updated_order_status = request.form["status"]
     cur.callproc("update_order_status", [order_id, updated_order_status.capitalize(),])
-    print(updated_order_status)
     con.commit()
     cur.close()
     return redirect(url_for("admin_dashboard.admin_dashboard", section="orders"))
+
+@admin_dashboard_bp.route("/edit_product", methods=["POST"])
+def edit_product():
+    cur = con.cursor()
+    
+    product_id = request.form["product_id"]
+    name = request.form["name"]
+    description = request.form["description"]
+    img_url = request.form["image_url"]
+    quantity = request.form["quantity"]
+    price = request.form["price"]
+    supplier_id = request.form["supplier_id"]
+
+    cur.callproc("edit_product", [product_id, name, description, img_url, quantity, price, supplier_id,])
+    con.commit()
+    cur.close()
+    return redirect(url_for("admin_dashboard.admin_dashboard", section="products"))

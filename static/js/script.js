@@ -34,10 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
       button.addEventListener('click', function () {
         document.getElementById('modalProductId').value = this.dataset.id;
         document.getElementById('modalName').value = this.dataset.name;
+        document.getElementById('modalDescription').value = this.dataset.description;
         document.getElementById('modalImage').value = this.dataset.image;
         document.getElementById('modalQuantity').value = this.dataset.quantity;
         document.getElementById('modalPrice').value = this.dataset.price;
-        document.getElementById('modalSupplier').value = this.dataset.supplier;
+        document.getElementById('modalSupplierId').value = this.dataset.supplierId;
       });
     });
   });

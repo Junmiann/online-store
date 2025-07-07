@@ -16,7 +16,7 @@ def login_form():
     user_password = request.form["password"]
 
     cur = con.cursor()
-    cur.callproc("get_user_by_email", [user_email])
+    cur.callproc("get_user_by_email", [user_email.strip().lower()])
     user = cur.fetchone()
 
     if user and check_password_hash(user[4] , user_password):

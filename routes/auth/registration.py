@@ -15,7 +15,7 @@ def register_form():
         email = request.form["email"]
 
         cur = con.cursor()
-        cur.callproc("get_user_by_email", [email])
+        cur.callproc("get_user_by_email", [email.strip().lower()])
         existing_email = cur.fetchone()
 
         if existing_email:

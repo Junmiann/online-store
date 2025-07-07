@@ -41,23 +41,32 @@
                 <div class="cart-products p-4">
                     <div class="cart-product-img">
                         {% if user[9] %}
-                            <img src="{{ product[0] }}" alt="{{ product[1] }}">
+                            <img src="{{ product[5] }}" alt="{{ product[0] }}">
                         {% else %}
-                            <a href="{{ url_for('product.product', product_id=product[4]) }}">
-                                <img src="{{ product[0] }}" alt="{{ product[1] }}">
-                            </a>
+                            {% if product[3] %}
+                                <a href="{{ url_for('product.product', product_id=product[3]) }}">
+                                    <img src="{{ product[5] }}" alt="{{ product[0] }}">
+                                </a>
+                            {% else %}
+                                <img src="{{ product[5] }}" alt="{{ product[0] }}">
+                            {% endif %}
                         {% endif %}
                     </div>
                     <div class="cart-product-details">
                         {% if user[9] %}
-                            <p class="font-weight-bold">{{ product[1] }}</p>
+                            <!-- Product name -->
+                            <p class="font-weight-bold">{{ product[0] }}</p>
                         {% else %}
-                            <p class="font-weight-bold">
-                                <a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a>
-                            </p>
+                            {% if product[3] %}
+                                <p class="font-weight-bold">
+                                    <a href="{{ url_for('product.product', product_id=product[3]) }}">{{ product[0] }}</a>
+                                </p>
+                            {% else %}
+                                <span class="font-weight-bold">{{ product[0] }}</span>
+                            {% endif %}
                         {% endif %}
-                        <p>{{ product[2] }}<span class="cart-product-unit-price"> x {{ product[5] }} </span></p>
-                        <p class="font-weight-bold">{{ product[3] }} SEK</p>
+                        <p><span class="cart-product-unit-price">{{ product[1] }}</span> x {{ product[4] }} SEK</p>
+                        <p class="font-weight-bold">{{ product[2] }} SEK</p>
                     </div>
                 </div>
             {% endfor %}

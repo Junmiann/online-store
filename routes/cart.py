@@ -22,7 +22,7 @@ def cart():
 
             # Get order details and products from DB
             user_orders_details = UserOrder.get_user_order_details(con, order_id)
-            user_order_products = UserOrder.get_user_order_products(con, order_id)
+            user_order_products = Cart.get_cart_products(con, order_id)
 
             # Render shopping cart page with all data
             return render_template("/cart.html", user=user, order_id=order_id, list_products=list_products, user_orders_details=user_orders_details, user_order_products=user_order_products)

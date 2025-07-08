@@ -55,6 +55,14 @@ def add_new_product():
     cur.close()
     return redirect(url_for("admin_dashboard.admin_dashboard", section="products"))
 
+@admin_dashboard_bp.route("/delete_product/<int:product_id>", methods=["POST"])
+def delete_product_from_DB(product_id):
+    cur = con.cursor()
+    cur.callproc("delete_product_from_DB", [product_id])
+    con.commit()
+    cur.close()
+    return redirect(url_for("admin_dashboard.admin_dashboard", section="products"))
+
 # Edit product information
 @admin_dashboard_bp.route("/edit_product", methods=["POST"])
 def edit_product():

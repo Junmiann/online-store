@@ -31,7 +31,25 @@ setTimeout(function(){
 document.addEventListener('DOMContentLoaded', function () {
     const editButtons = document.querySelectorAll('.edit-btn');
     const form = document.querySelector('#productModal form');
+    const deleteBtn = document.getElementById('deleteProductBtn');
 
+    /* Add new product */
+    const addButton = document.getElementById('addNewProductBtn');
+    addButton.addEventListener('click', function () {
+        form.action = this.dataset.action;
+
+        document.getElementById('modalProductId').value = '';
+        document.getElementById('modalName').value = '';
+        document.getElementById('modalDescription').value = '';
+        document.getElementById('modalImage').value = '';
+        document.getElementById('modalQuantity').value = '';
+        document.getElementById('modalPrice').value = '';
+        document.getElementById('modalSupplierId').value = '';
+
+        deleteBtn.style.display = 'none';
+    });
+
+    /* Edit */
     editButtons.forEach(button => {
         button.addEventListener('click', function () {
             form.action = this.dataset.action;
@@ -43,20 +61,20 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('modalQuantity').value = this.dataset.quantity;
             document.getElementById('modalPrice').value = this.dataset.price;
             document.getElementById('modalSupplierId').value = this.dataset.supplierId;
+
+            deleteBtn.style.display = 'inline-block';
         });
     });
 
-    const addButton = document.getElementById('addNewProductBtn');
-    addButton.addEventListener('click', function () {
-        const form = document.querySelector('#productModal form');
-        form.action = this.dataset.action;
-
-        document.getElementById('modalProductId').value = '';
-        document.getElementById('modalName').value = '';
-        document.getElementById('modalDescription').value = '';
-        document.getElementById('modalImage').value = '';
-        document.getElementById('modalQuantity').value = '';
-        document.getElementById('modalPrice').value = '';
-        document.getElementById('modalSupplierId').value = '';
+    /* Delete button */
+    deleteBtn.addEventListener('click', function () {
+        if (confirm("Are you sure you want to delete the product?")) {
+            const productId = document.getElementById('modalProductId').value;
+            const formDelete = document.createElement('form');
+            formDelete.method = 'POST';
+            formDelete.action = `/delete_product/${productId}`;
+            document.body.appendChild(formDelete);
+            formDelete.submit();
+        }
     });
 });

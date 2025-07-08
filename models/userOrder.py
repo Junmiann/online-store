@@ -5,7 +5,7 @@ class UserOrder:
         All of the customer's orders (order ID, date, total sum, status)
         """ 
         with con.cursor() as cur:
-            cur.callproc("customer_orders1", [user])
+            cur.callproc("customer_orders", [user])
             user_orders = cur.fetchall()
             return user_orders
     

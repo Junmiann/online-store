@@ -13,16 +13,20 @@
                 <h4 class="font-weight-bold text-uppercase">{{ product_info[1] }}</h4> <!-- product name -->
                 <h3 class="font-weight-bold display-4">{{ product_info[4] }} SEK</h3>
                 <p class="text-justify">{{ product_info[2] }}</p>
-                <form method="post" action="{{ url_for('cart.add_to_cart', product_id=product_info[0]) }}">
-                    <div class="add-to-cart-field mt-5">
-                        <div class="quantity p-2">
-                            <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>
-                            <input id="quantity" min="1" max="10" name="quantity" value="1" type="number" readonly>
-                            <button class="btn add-btn" type="button" onclick="increment()">+</button>
+                {% if product_info[6] > 0 %}
+                    <form method="post" action="{{ url_for('cart.add_to_cart', product_id=product_info[0]) }}">
+                        <div class="add-to-cart-field mt-5">
+                            <div class="quantity p-2">
+                                <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>
+                                <input id="quantity" min="1" max="10" name="quantity" value="1" type="number" readonly>
+                                <button class="btn add-btn" type="button" onclick="increment()">+</button>
+                            </div>
+                            <input type="submit" class="add-to-cart-btn btn ml-3 text-uppercase" id="add-to-cart-btn" value="Add to cart">
                         </div>
-                        <input type="submit" class="add-to-cart-btn btn ml-3 text-uppercase" id="add-to-cart-btn" value="Add to cart">
-                    </div>
-                </form>
+                    </form>
+                {% else %}
+                    <button class="btn btn-secondary" disabled>Out of stock</button>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

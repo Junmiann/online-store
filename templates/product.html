@@ -14,6 +14,9 @@
                 <h3 class="font-weight-bold display-4">{{ product_info[4] }} SEK</h3>
                 <p class="text-justify">{{ product_info[2] }}</p>
                 {% if product_info[6] > 0 %}
+                    {% if product_info[6] <= 5 %}
+                        <p style="color: red">{{product_info[6]}} left in stock</p>
+                    {% endif %}
                     <form method="post" action="{{ url_for('cart.add_to_cart', product_id=product_info[0]) }}">
                         <div class="add-to-cart-field mt-5">
                             <div class="quantity p-2">

@@ -31,6 +31,15 @@ def order_check_out(order_id):
         flash("Please add an item into the cart before checking out!")
         return redirect(url_for("cart.cart"))
     
-    else: 
+    else:
+        user_cart_items = Cart.get_cart_products(con, order_id)
+        for item in user_cart_items:
+            product_id = item[4]
+            selected_quantity = item[2]
+
+            with con.cursor() as cur:
+                cur.callproc("update_product_quantity", [product_id, selected_quantity,])
+                con.commit()
+
         Cart.check_out(con, user[0], order_id)
         return render_template("/cart.html", checkout_success=True, user=session.get("user"))

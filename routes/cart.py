@@ -34,7 +34,8 @@ def cart():
     else:
         flash("Log in to check your shopping cart!")
         return redirect(url_for("login.login"))
-    
+
+# TODO: The function is too long, shorten it for readability and maintainability
 @cart_bp.route("/add_to_cart/<int:product_id>", methods=["POST"])
 def add_to_cart(product_id):
     user = session.get("user")
@@ -42,39 +43,39 @@ def add_to_cart(product_id):
     if not user:
         flash("Log in to add products to your shopping cart!")
         return redirect(url_for("login.login"))
-    else:
-        order_id = check_order_status()
+    
+    order_id = check_order_status()
 
-        cur = con.cursor()
+    cur = con.cursor()
 
-        user_chosen_quantity = int(request.form["quantity"])
-        cur.callproc("get_product_by_id", [product_id])
-        product = cur.fetchone()
-        left_in_stock = product[6]
-        
-        cur.callproc("check_product_in_cart", [order_id, product_id])
-        existing_product_in_cart = cur.fetchall()
-        try:
-            if user_chosen_quantity > left_in_stock:
-                return handle_cart_quantity_error(con, product_id)
-            elif existing_product_in_cart:
-                product_quantity_in_cart = existing_product_in_cart[0][3] 
-
-                if product_quantity_in_cart + user_chosen_quantity > left_in_stock:
-                    return handle_cart_quantity_error(con, product_id)
-                else:
-                    cur.callproc("update_product_quantity", [user_chosen_quantity, order_id, product_id])
-            else:
-                cur.callproc("add_product", [order_id, user[0], product_id, user_chosen_quantity])
-        except psycopg2.Error:
+    user_chosen_quantity = int(request.form["quantity"])
+    cur.callproc("get_product_by_id", [product_id])
+    product = cur.fetchone()
+    left_in_stock = product[6]
+    
+    cur.callproc("check_product_in_cart", [order_id, product_id])
+    existing_product_in_cart = cur.fetchall()
+    try:
+        if user_chosen_quantity > left_in_stock:
             return handle_cart_quantity_error(con, product_id)
+        elif existing_product_in_cart:
+            product_quantity_in_cart = existing_product_in_cart[0][3] 
 
-        cur.callproc("update_order_total_price", [order_id])
-        con.commit()
-        cur.close()
+            if product_quantity_in_cart + user_chosen_quantity > left_in_stock:
+                return handle_cart_quantity_error(con, product_id)
+            else:
+                cur.callproc("update_cart_product_quantity", [user_chosen_quantity, order_id, product_id])
+        else:
+            cur.callproc("add_product", [order_id, user[0], product_id, user_chosen_quantity])
+    except psycopg2.Error:
+        return handle_cart_quantity_error(con, product_id)
 
-        flash("The product has been added to your cart!")
-        return redirect(url_for("product.product", product_id=product_id))
+    cur.callproc("update_order_total_price", [order_id])
+    con.commit()
+    cur.close()
+
+    flash("The product has been added to your cart!")
+    return redirect(url_for("product.product", product_id=product_id))
 
 @cart_bp.route("/remove_item_from_cart/<int:product_id>", methods=["POST"])
 def remove_item_from_cart(product_id):

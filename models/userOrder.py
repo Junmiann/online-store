@@ -29,3 +29,12 @@ class UserOrder:
             cur.callproc("get_order_products", [order_id])
             user_order_products = cur.fetchall()
             return user_order_products
+        
+    @staticmethod
+    def check_out(con, user_id, order_id):
+        with con.cursor() as cur:
+            cur.callproc("order_check_out", [user_id, order_id])
+            con.commit()
+
+            cur.callproc("copy_cart_to_order_items", [order_id])
+            con.commit()

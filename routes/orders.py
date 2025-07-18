@@ -57,4 +57,4 @@ def order_check_out(order_id):
 
     con.commit()
     Cart.check_out(con, user[0], order_id)
-    return render_template("/cart.html", checkout_success=True, user=session.get("user"))
+    return render_template("/cart.html", checkout_success=True, user=user)

@@ -45,13 +45,10 @@ def order_check_out(order_id):
             left_in_stock = product[6]
             
             if left_in_stock == 0:
-                con.rollback()
-                flash(f"{product_name} is unfortunately out of stock!")
-                return redirect(url_for("cart.cart"))
+                return handle_stock_error(con, f"{product_name} is unfortunately out of stock!", "cart.cart")
+
             elif user_chosen_quantity > left_in_stock:
-                con.rollback()
-                flash(f"The quantity you selected for {product_name} exceeds our current stock.")
-                return redirect(url_for("cart.cart"))
+                return handle_stock_error(con, f"The quantity you selected for {product_name} exceeds our current stock.", "cart.cart")
     
         for item in user_cart_items:
             product_id = item[4]

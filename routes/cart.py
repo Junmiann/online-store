@@ -8,11 +8,6 @@ app = Flask(__name__)
 
 cart_bp = Blueprint('cart', __name__, url_prefix='')
 
-def handle_cart_quantity_error(con, product_id):
-    con.rollback()
-    flash("Not enough in stock! The product was not added into your cart.")
-    return redirect(url_for("product.product", product_id=product_id))
-
 def check_product_in_cart(con, order_id, product_id):
     cur = con.cursor()
     cur.callproc("get_product_by_id", [product_id])
@@ -81,7 +76,7 @@ def add_to_cart(product_id):
 
     success = quantity_comparison(user, user_chosen_quantity, order_id, product_id)
     if not success:
-        return handle_cart_quantity_error(con, product_id)
+        return handle_stock_error(con, "Not enough in stock! The product was not added into your cart.", "product.product", product_id=product_id)
 
     update_total_price(order_id)
 

@@ -4,20 +4,22 @@
 
 {% block content %}
   <div class="container text-center m-auto">
-    <div class="products-container">
+    <h2 class="text-uppercase font-weight-bold my-4">Our Products</h2>
+    <section class="products-container" aria-label="List of products">
       {% for product in list_products %}
-        <div class="product">
+        <article class="product">
           <a href="{{ url_for('product.product', product_id=product[0]) }}">
             <div class="product-img">
                 <img src="{{ product[3] }}" alt="{{ product[1] }}" class="w-auto h-auto" draggable="false">
             </div>
-          </a> 
+          </a>
+          
           <div class="product-info">
               <p class="m-0 mt-2">{{ product[1] }}</p> <!-- product name -->
               <p class="font-weight-bold product-price mb-2">{{ product[5] }} SEK</p>
           </div>
-        </div>
+        </article>
       {% endfor %}
-    </div>
+    </section>
   </div>
 {% endblock %}

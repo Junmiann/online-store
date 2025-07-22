@@ -8,30 +8,29 @@
     <div class="container">
         {% if checkout_success %}
             <!-- Order confirmation content -->
-            <div class="confirmation-msg text-center p-5">
+            <section class="confirmation-msg text-center p-5">
                 <h2 class="font-weight-bold mb-4">Thank you for your purchase!</h2>
                 <img src="/static/img/confirmation.png" alt="Order confirmed" draggable="false">
                 <p class="mt-3">Your order has been successfully placed.</p>
-            </div>
-            <div>
+
                 <a id="back-to-homepage" href="{{url_for('index')}}">
                     <p class="text-center">Go back to homepage</p>
                 </a>
-            </div>
+            </section>
         {% else %}
             {% if user %}
                 {% if order_id %}
                     <h1 class="text-uppercase font-weight-bold p-4 mb-0">Cart</h1>
                     {% for product in user_order_products %}
-                        <div class="cart-products p-4">
-                            <!-- Product image -->
+                        <article class="cart-products p-4">
+                            <!-- Image -->
                             <div class="cart-product-img">
                                 <a href="{{ url_for('product.product', product_id=product[4]) }}">
                                     <img src="{{ product[0] }}" alt="{{ product[1] }}">
                                 </a>
                             </div>
 
-                            <!-- Product details -->
+                            <!-- Details -->
                             <div class="cart-product-details"> 
                                 <!-- Name -->
                                 <p class="font-weight-bold"><a href="{{ url_for('product.product', product_id=product[4]) }}">{{ product[1] }}</a></p>
@@ -49,21 +48,21 @@
                                     </button>
                                 </form>
                             </div>
-                        </div>
+                        </article>
                     {% endfor %}
                     
-                    <!-- Total sum -->
                     {% for order_detail in user_orders_details %}
-                        <div class="total-sum p-2 mt-4 text-center">
+                        <!-- Total sum -->
+                        <section class="total-sum p-2 mt-4 text-center">
                             <p class="font-weight-bold">Total {{ order_detail[2] }} SEK</p>
-                        </div>
+                        </section>
                         
                         <!-- Check out button -->
-                        <div class="mt-4 text-center">
+                        <section class="mt-4 text-center">
                             <form method="POST" action="{{ url_for('orders.order_check_out', order_id=order_detail[0]) }}" onclick="showCheckOutPopUp()">
                                 <button type="submit" class="check-out-btn p-4 font-weight-bold">Check out</button>
                             </form>
-                        </div>
+                        </section>
                     {% endfor %}
                 {% endif %}
             {% endif %}

@@ -13,15 +13,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Rambla:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     </head>
     <body>
-        {% if user %}
-            {% if user[9] %}
-                {% include "partials/admin_navbar.html" %}
+        <header>
+            {% if user %}
+                {% if user[9] %}
+                    {% include "partials/admin_navbar.html" %}
+                {% else %}
+                    {% include "partials/navbar.html" %}
+                {% endif %}
             {% else %}
                 {% include "partials/navbar.html" %}
             {% endif %}
-        {% else %}
-            {% include "partials/navbar.html" %}
-        {% endif %}
+        </header>
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -31,7 +33,9 @@
             {% endif %}
         {% endwith %}
 
-        {% block content %}{% endblock %}
+        <main>
+            {% block content %}{% endblock %}
+        </main>
 
         <script src="/static/js/script.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>

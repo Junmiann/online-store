@@ -20,25 +20,30 @@
                     </form>
                 {% endfor %}
             {% endif %}
+
             {% for order_info in user_orders %}
-            <div class="order" id="order-quick-info">
-                <table>
-                    <tr class="text-uppercase">
-                        <th>Order ID</th>
-                        <th>Order date</th>
-                        <th>Total</th>
-                    </tr>
-                    <tr>
-                        <td>{{ order_info[0] }}</td>
-                        <td>{{ order_info[1] }}</td>
-                        <td>{{ order_info[2] }} SEK</td>
-                    </tr>
-                </table>
-            </div>
+                <section class="order" id="order-quick-info" aria-label="Order summary">
+                    <table>
+                        <thead>
+                            <tr class="text-uppercase">
+                                <th>Order ID</th>
+                                <th>Order date</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ order_info[0] }}</td>
+                                <td>{{ order_info[1] }}</td>
+                                <td>{{ order_info[2] }} SEK</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
             {% endfor %}
 
             {% for product in user_order_products %}
-                <div class="cart-products p-4">
+                <article class="cart-products p-4">
                     <div class="cart-product-img">
                         {% if user[9] %}
                             <img src="{{ product[5] }}" alt="{{ product[0] }}">
@@ -52,6 +57,7 @@
                             {% endif %}
                         {% endif %}
                     </div>
+
                     <div class="cart-product-details">
                         {% if user[9] %}
                             <!-- Product name -->
@@ -68,7 +74,7 @@
                         <p><span class="cart-product-unit-price">{{ product[1] }}</span> x {{ product[4] }} SEK</p>
                         <p class="font-weight-bold">{{ product[2] }} SEK</p>
                     </div>
-                </div>
+                </article>
             {% endfor %}
         {% endif %}
     </div>

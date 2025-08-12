@@ -3,8 +3,8 @@
 {% block title %}OnlineStore{% endblock %}
 
 {% block content %}
-  <div class="container text-center m-auto">
-    <h2 class="text-uppercase font-weight-bold my-4">Our Products</h2>
+  <div class="text-center m-auto">
+    <h2 class="text-uppercase font-weight-bold">Our Products</h2>
     <section class="products-container" aria-label="List of products">
       {% for product in list_products %}
         <article class="product">
@@ -16,7 +16,7 @@
           
           <div class="product-info">
               <p class="m-0 mt-2">{{ product[1] }}</p> <!-- product name -->
-              <p class="font-weight-bold product-price mb-2">{{ product[5] }} SEK</p>
+              <p class="product-price mb-2 font-weight-bold">{{ product[5] }} SEK</p>
           </div>
         </article>
       {% endfor %}

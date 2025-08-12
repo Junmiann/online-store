@@ -72,7 +72,7 @@
 .products-container {
     display: flex;
     flex-wrap: wrap;
-    flex: auto;
+    justify-content: center;
 }
 
 .product {
@@ -80,25 +80,25 @@
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    width: 20em;
+    overflow: hidden;
+    width: 15em;
     height: auto;
-    margin: 1.5em;
+    margin: 1em;
     padding: 1em;
-    border: 1px solid #DDD;
-    border-radius: 3px;
+    background-color: #f5f8fa;
+    border-radius: 2px;
 }
 
-.product-img > img {
-    vertical-align: middle;
-    max-width: 18em;
-    max-height: 14em;
+.product-img img {
+    max-width: 13em;
+    height: auto;
     border-radius: 2px;
 }
 
 .product-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    text-align: start;
     color: #111;
 }
 
@@ -440,30 +440,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* tablet, laptop size */
 @media only screen and (max-width: 1200px) {
-    /* products on homepage */
-    .products-container {
-        justify-content: center;
-    }
-    
-    .product {
-        width: 17em;
-        margin: 1em;
-    }
-
-    .product-img > img {
-        max-width: 15em;
-        max-height: 13em;
-    }
-
-    .product-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        color: #111;
-    }
-
     /* product (individual page) */
-
     .selected-product-img > img {
         height: auto;
         max-height: 25em;
@@ -525,30 +502,7 @@ input[type=number]::-webkit-outer-spin-button {
     .bi-person {
         margin-left: -2px;
     }
-
-    /* products on homepage */
-    .products-container {
-        justify-content: center;
-    }
-
-    .product {
-        width: 12em;
-    }
-
-    .product-img > img {
-        width: 100%;
-        max-width: 10em;
-        height: 100%;
-        max-height: 12em;
-    }
-
-    .product-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        color: #111;
-    }
-
+    
     /* product page (individual) */
     .selected-product-container {
         display: flex;

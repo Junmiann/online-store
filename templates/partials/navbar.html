@@ -11,9 +11,9 @@
 
     <!-- search bar -->
     {% block search %}
-    <div class="search-container mx-auto">
-        <form method="GET" action="{{ url_for('product.search') }}" class="form-inline" role="search" aria-label="Product search">
-            <input class="form-control" id="search-field" name="query" type="search" placeholder="Search" aria-label="Search products">
+    <div class="search-container d-flex">
+        <form method="GET" action="{{ url_for('product.search') }}" role="search" aria-label="Product search">
+            <input class="form-control m-auto" id="search-field" name="query" type="search" placeholder="Search" aria-label="Search products">
         </form>
     </div>
     {% endblock %}

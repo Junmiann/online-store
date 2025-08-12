@@ -56,25 +56,16 @@
 }
 
 /* search container */
-.search-container {
-    display: flex;
-    box-sizing: border-box;
-    overflow: hidden;
-    max-width: 100%;
-}
-
-#search-form {
+.search-container,
+.search-container form {
     width: 100%;
-    justify-content: center;
 }
 
 #search-field {
-    width: 100%;
     max-width: 45em;
     height: 3em;
     border-radius: 25px;
     padding: 1.5em;
-    box-sizing: border-box;
 }
 
 /* products (on homepage) */
@@ -521,10 +512,6 @@ input[type=number]::-webkit-outer-spin-button {
     .brand-icon > img {
         max-width: 4em;
         max-height: 4em;
-    }
-
-    #search-field {
-        width: 100em;
     }
 
     /* navbar */

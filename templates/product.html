@@ -18,7 +18,7 @@
                             <p style="color: red">{{product_info[6]}} left in stock</p>
                         {% endif %}
                         <form method="post" action="{{ url_for('cart.add_to_cart', product_id=product_info[0]) }}" aria-label="Add {{ product_info[1] }} to cart">
-                            <div class="add-to-cart-field mt-5">
+                            <div class="add-to-cart-field">
                                 <div class="quantity p-2">
                                     <button class="btn p-3 minus-btn" type="button" onclick="decrement()">-</button>
                                     <input id="quantity" min="1" max="10" name="quantity" value="1" type="number" readonly>

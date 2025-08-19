@@ -24,11 +24,11 @@
                                     <input id="quantity" min="1" max="10" name="quantity" value="1" type="number" readonly>
                                     <button class="btn add-btn" type="button" onclick="increment()">+</button>
                                 </div>
-                                <input type="submit" class="add-to-cart-btn btn ml-3 text-uppercase" id="add-to-cart-btn" value="Add to cart">
+                                <input type="submit" class="add-to-cart-btn btn ml-3 text-uppercase" value="Add to cart">
                             </div>
                         </form>
                     {% else %}
-                        <button class="btn btn-secondary" disabled>Out of stock</button>
+                        <button class="btn btn-secondary p-3" disabled>Out of stock</button>
                     {% endif %}
                 </div>
             </article>

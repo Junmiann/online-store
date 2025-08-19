@@ -1,5 +1,5 @@
 <nav class="admin_navbar" role="navigation">
-    <img src="/static/img/Online-store-logo.png" alt="brand logo" class="brand-icon">
+    <img src="/static/img/Online-store-logo.png" alt="brand logo" class="brand-icon admin-brand-icon p-2">
     <ul>
         <li class="{% if section == 'orders' %}active{% endif %}">
             <a href="{{ url_for('admin_dashboard.admin_dashboard', section='orders') }}" aria-label="See all orders">

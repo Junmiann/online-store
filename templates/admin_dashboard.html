@@ -2,10 +2,8 @@
 
 {% block title %}OnlineStore │ Admin dashboard{% endblock %}
 
-{% block search %}{% endblock %}
-
 {% block content %}
-    <div class="container admin-container p-4">
+    <div class="container p-4">
         <h1 class="text-uppercase font-weight-bold">{{ section|capitalize }}</h1>
 
         {% if section == 'products' %}
@@ -22,7 +20,7 @@
         {% endif %}
 
         <!-- Data Table -->
-        <div class="order">
+        <div class="order admin-order">
             <table class="table table-hover text-center">
                 <thead>
                     <tr>

@@ -373,10 +373,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* admin dashboard*/
-.container.admin-container {
-    margin-left: 16em;
-}
-
 .admin_navbar {
     position: fixed;
     top: 0;
@@ -388,6 +384,10 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #E9EBEC;
     padding: 2em;
     align-items: center;
+}
+
+.admin-brand-icon {
+    margin-left: 0;
 }
 
 .admin_navbar ul {
@@ -564,7 +564,8 @@ input[type=number]::-webkit-outer-spin-button {
         margin: 0;
     }
 
-    .form {
+    .form, 
+    .form > div {
         width: 100%;
     }
     .form > p {
